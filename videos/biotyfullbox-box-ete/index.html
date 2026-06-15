@@ -18,13 +18,55 @@
         overflow: hidden;
         background: #000;
       }
-      body {
-        font-family: "Inter", sans-serif;
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
       }
-      code,
-      pre,
-      .monospace {
-        font-family: "JetBrains Mono", monospace;
+      /* Sub-comp slots stretch to fill the root */
+      #root > div[data-composition-src] {
+        position: absolute;
+        inset: 0;
+      }
+
+      /* Brand design tokens (from design-system/chunks/tokens.css) */
+      :root {
+        --brand-primary:   #00B4CC;
+        --brand-secondary: #F9A8D4;
+        --brand-tertiary:  #FBBF24;
+        --brand-accent:    #FBBF24;
+        --brand-costume:   #FFF8F0;
+        --ink:             #2D6A6A;
+        --canvas:          #FFF8F0;
+        --brand-gradient:  linear-gradient(135deg, #00B4CC 0%, #F9A8D4 50%, #FBBF24 100%);
+        --deco-1:          #F7CB46;
+        --deco-2:          #99E885;
+        --deco-3:          #C0F7FE;
+        --deco-4:          #FE90E8;
+        --font-display:    'EB Garamond', Georgia, serif;
+        --font-body:       'Work Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        --font-mono:       'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+        --paper-anchor: #f2eedf;
+        --surface-card: rgba(255, 255, 255, 0.55);
+        --surface-paper: color-mix(in srgb, var(--brand-accent) 8%, var(--paper-anchor));
+        --rule-dashed: 1px dashed color-mix(in srgb, var(--ink) 18%, transparent);
+        --rule-solid: 1.5px solid color-mix(in srgb, var(--ink) 35%, transparent);
+        --radius-card-lg: 36px; /* large insight / closer / stat cards */
+        --radius-card: 28px; /* default cards, items, process nodes */
+        --radius-card-sm: 24px; /* compact panels, action bars */
+        --radius-tile: 16px; /* swatch tiles */
+        --radius-chip: 14px; /* small decorative chips */
+        --radius-pill: 999px; /* status pills, swatch discs */
+        --gap-outer: 4.2vw; /* ~80px on 1920 — outer slide padding */
+        --gap-cards: 1.5vw; /* ~28px between cards in a row */
+        --gap-cards-lg: 1.9vw; /* ~36px between major panels */
+        --gap-stack: 1.9vw; /* vertical between stacked text */
+        --pad-card-lg: 64px 48px;
+        --pad-card-md: 48px 52px;
+        --pad-card-sm: 28px 30px;
+        --measure-body: 32vw; /* ~614px ≈ 65ch at body size */
+        --measure-display: 43vw; /* ~826px ≈ display headline cap */
       }
     </style>
   </head>
@@ -33,27 +75,214 @@
       id="root"
       data-composition-id="main"
       data-start="0"
-      data-duration="10"
+      data-duration="87.915"
       data-width="1920"
       data-height="1080"
     >
-      
-      
+      <!-- HF-SCENE-CLIP scene_1 (0 → 6.827) -->
+      <div
+        id="el-scene_1"
+        data-composition-id="scene_1"
+        data-composition-src="compositions/scene_1.html"
+        data-start="0"
+        data-duration="7.427"
+        data-track-index="0"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <audio
+        id="el-scene_1-voice"
+        class="clip"
+        src="assets/voice/scene_1.wav"
+        data-start="0"
+        data-duration="6.827"
+        data-track-index="10"
+      ></audio>
 
-      <!--
-        Add your clips here. Example:
-        <div id="title" class="clip" data-start="0" data-duration="5" data-track-index="1"
-             style="font-size: 64px; color: #fff; padding: 40px">
-          Hello World
-        </div>
-      -->
+      <!-- HF-SCENE-CLIP scene_2 (6.827 → 16.832) -->
+      <div
+        id="el-scene_2"
+        data-composition-id="scene_2"
+        data-composition-src="compositions/scene_2.html"
+        data-start="6.827"
+        data-duration="10.505"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <audio
+        id="el-scene_2-voice"
+        class="clip"
+        src="assets/voice/scene_2.wav"
+        data-start="6.827"
+        data-duration="10.005"
+        data-track-index="10"
+      ></audio>
+
+      <!-- HF-SCENE-CLIP scene_3 (16.832 → 27.563) -->
+      <div
+        id="el-scene_3"
+        data-composition-id="scene_3"
+        data-composition-src="compositions/scene_3.html"
+        data-start="16.832"
+        data-duration="11.231"
+        data-track-index="0"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <audio
+        id="el-scene_3-voice"
+        class="clip"
+        src="assets/voice/scene_3.wav"
+        data-start="16.832"
+        data-duration="10.730999999999998"
+        data-track-index="10"
+      ></audio>
+
+      <!-- HF-SCENE-CLIP scene_4 (27.563 → 38.443) -->
+      <div
+        id="el-scene_4"
+        data-composition-id="scene_4"
+        data-composition-src="compositions/scene_4.html"
+        data-start="27.563"
+        data-duration="11.48"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <audio
+        id="el-scene_4-voice"
+        class="clip"
+        src="assets/voice/scene_4.wav"
+        data-start="27.563"
+        data-duration="10.879999999999999"
+        data-track-index="10"
+      ></audio>
+
+      <!-- HF-SCENE-CLIP scene_5 (38.443 → 46.998) -->
+      <div
+        id="el-scene_5"
+        data-composition-id="scene_5"
+        data-composition-src="compositions/scene_5.html"
+        data-start="38.443"
+        data-duration="9.055"
+        data-track-index="0"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <audio
+        id="el-scene_5-voice"
+        class="clip"
+        src="assets/voice/scene_5.wav"
+        data-start="38.443"
+        data-duration="8.555"
+        data-track-index="10"
+      ></audio>
+
+      <!-- HF-SCENE-CLIP scene_6 (46.998 → 60.63) -->
+      <div
+        id="el-scene_6"
+        data-composition-id="scene_6"
+        data-composition-src="compositions/scene_6.html"
+        data-start="46.998"
+        data-duration="14.232"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <audio
+        id="el-scene_6-voice"
+        class="clip"
+        src="assets/voice/scene_6.wav"
+        data-start="46.998"
+        data-duration="13.632000000000005"
+        data-track-index="10"
+      ></audio>
+
+      <!-- HF-SCENE-CLIP scene_7 (60.63 → 69.611) -->
+      <div
+        id="el-scene_7"
+        data-composition-id="scene_7"
+        data-composition-src="compositions/scene_7.html"
+        data-start="60.63"
+        data-duration="9.381"
+        data-track-index="0"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <audio
+        id="el-scene_7-voice"
+        class="clip"
+        src="assets/voice/scene_7.wav"
+        data-start="60.63"
+        data-duration="8.981000000000002"
+        data-track-index="10"
+      ></audio>
+
+      <!-- HF-SCENE-CLIP scene_8 (69.611 → 77.632) -->
+      <div
+        id="el-scene_8"
+        data-composition-id="scene_8"
+        data-composition-src="compositions/scene_8.html"
+        data-start="69.611"
+        data-duration="8.621"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <audio
+        id="el-scene_8-voice"
+        class="clip"
+        src="assets/voice/scene_8.wav"
+        data-start="69.611"
+        data-duration="8.021"
+        data-track-index="10"
+      ></audio>
+
+      <!-- HF-SCENE-CLIP scene_9 (77.632 → 87.915) -->
+      <div
+        id="el-scene_9"
+        data-composition-id="scene_9"
+        data-composition-src="compositions/scene_9.html"
+        data-start="77.632"
+        data-duration="10.283"
+        data-track-index="0"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <audio
+        id="el-scene_9-voice"
+        class="clip"
+        src="assets/voice/scene_9.wav"
+        data-start="77.632"
+        data-duration="10.283"
+        data-track-index="10"
+      ></audio>
+
     </div>
 
     <script>
       window.__timelines = window.__timelines || {};
-      const tl = gsap.timeline({ paused: true });
-      // Example: tl.from("#title", { opacity: 0, y: -50, duration: 1 }, 0);
-      window.__timelines["main"] = tl;
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+      // ── scene transitions (injected by inject-transitions.mjs) ──
+      (function () { var tl = window.__timelines["main"];
+        tl.to("#el-scene_1", { filter: "blur(10px)", scale: 1.03, opacity: 0, duration: 0.6, ease: "power2.inOut" }, 6.827);
+        tl.fromTo("#el-scene_2", { filter: "blur(10px)", scale: 0.97, opacity: 0 }, { filter: "blur(0px)", scale: 1, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 6.827);
+        tl.to("#el-scene_2", { x: -1920, duration: 0.5, ease: "power3.inOut" }, 16.832);
+        tl.fromTo("#el-scene_3", { x: 1920, opacity: 1 }, { x: 0, duration: 0.5, ease: "power3.inOut" }, 16.832);
+        tl.to("#el-scene_3", { x: 1920, duration: 0.5, ease: "power3.inOut" }, 27.563);
+        tl.fromTo("#el-scene_4", { x: -1920, opacity: 1 }, { x: 0, duration: 0.5, ease: "power3.inOut" }, 27.563);
+        tl.to("#el-scene_4", { filter: "blur(10px)", scale: 1.03, opacity: 0, duration: 0.6, ease: "power2.inOut" }, 38.443);
+        tl.fromTo("#el-scene_5", { filter: "blur(10px)", scale: 0.97, opacity: 0 }, { filter: "blur(0px)", scale: 1, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 38.443);
+        tl.to("#el-scene_5", { x: -1920, duration: 0.5, ease: "power3.inOut" }, 46.998);
+        tl.fromTo("#el-scene_6", { x: 1920, opacity: 1 }, { x: 0, duration: 0.5, ease: "power3.inOut" }, 46.998);
+        tl.to("#el-scene_6", { filter: "blur(10px)", scale: 1.03, opacity: 0, duration: 0.6, ease: "power2.inOut" }, 60.63);
+        tl.fromTo("#el-scene_7", { filter: "blur(10px)", scale: 0.97, opacity: 0 }, { filter: "blur(0px)", scale: 1, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 60.63);
+        tl.to("#el-scene_7", { scale: 2.5, opacity: 0, filter: "blur(8px)", duration: 0.4, ease: "power3.in" }, 69.611);
+        tl.fromTo("#el-scene_8", { scale: 0.5, opacity: 0, filter: "blur(8px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.4, ease: "power3.out" }, 69.611);
+        tl.to("#el-scene_8", { filter: "blur(10px)", scale: 1.03, opacity: 0, duration: 0.6, ease: "power2.inOut" }, 77.632);
+        tl.fromTo("#el-scene_9", { filter: "blur(10px)", scale: 0.97, opacity: 0 }, { filter: "blur(0px)", scale: 1, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 77.632);
+      })();
     </script>
   </body>
 </html>
