@@ -1,0 +1,292 @@
+<template id="scene_1-template">
+  <div id="root" class="scene_1-root" data-composition-id="scene_1" data-width="1920" data-height="1080" data-duration="6.827" style="position:relative; width:1920px; height:1080px; overflow:hidden;">
+    <style>
+      #root {
+        background: var(--canvas);
+        font-family: var(--font-body);
+      }
+      #root *,
+      #root *::before,
+      #root *::after {
+        box-sizing: border-box;
+      }
+
+      /* Ambient mesh background — three atmospheric blobs */
+      .s1-mesh {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .s1-blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.18;
+      }
+      .s1-blob-1 {
+        width: 700px;
+        height: 700px;
+        background: var(--brand-primary);
+        top: -200px;
+        left: -150px;
+      }
+      .s1-blob-2 {
+        width: 600px;
+        height: 600px;
+        background: var(--brand-secondary);
+        bottom: -180px;
+        right: -100px;
+      }
+      .s1-blob-3 {
+        width: 500px;
+        height: 500px;
+        background: var(--brand-accent);
+        top: 200px;
+        right: 300px;
+        opacity: 0.10;
+      }
+
+      /* Camera wrapper */
+      .s1-camera {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        transform-origin: 50% 50%;
+        will-change: transform;
+      }
+
+      /* Content: centered column */
+      .s1-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        width: 1056px; /* ~55% of 1920 */
+      }
+
+      /* Eyebrow phrase: "Un été qui sent les..." */
+      .s1-phrase {
+        font-family: var(--font-display);
+        font-size: 56px;
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1.15;
+        opacity: 0;
+        will-change: transform;
+        max-width: 900px;
+      }
+      .s1-phrase em {
+        font-style: italic;
+      }
+
+      /* Brand name line */
+      .s1-brand {
+        font-family: var(--font-display);
+        font-size: 96px;
+        font-weight: 600;
+        color: var(--brand-primary);
+        letter-spacing: -0.02em;
+        line-height: 1;
+        margin-top: 16px;
+        opacity: 0;
+        will-change: transform;
+      }
+
+      /* Botanical SVG arc — decorative ornament */
+      .s1-botanical {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 0;
+        overflow: visible;
+      }
+      .s1-botanical path {
+        fill: none;
+        stroke: var(--brand-primary);
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        opacity: 0.38;
+      }
+    </style>
+
+    <!-- Ambient mesh background -->
+    <div class="s1-mesh">
+      <div class="s1-blob s1-blob-1"></div>
+      <div class="s1-blob s1-blob-2"></div>
+      <div class="s1-blob s1-blob-3"></div>
+    </div>
+
+    <!-- Botanical arc SVG (decorative, background layer) -->
+    <svg class="s1-botanical" id="s1-botanical-svg" width="1200" height="600" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+      <!-- Gentle botanical arc framing the headline area -->
+      <path id="s1-arc-main" d="M 80 480 C 200 200, 500 80, 720 100 C 900 120, 1050 200, 1120 380" />
+      <!-- Small leaf left -->
+      <path id="s1-leaf-1" d="M 240 260 C 220 230, 190 220, 180 240 C 200 250, 230 255, 240 260Z" />
+      <!-- Small leaf right -->
+      <path id="s1-leaf-2" d="M 920 200 C 940 175, 970 170, 980 190 C 960 205, 935 205, 920 200Z" />
+      <!-- Tiny accent dot sprigs -->
+      <path id="s1-sprig-1" d="M 450 118 C 440 100, 455 90, 465 105" />
+      <path id="s1-sprig-2" d="M 780 108 C 790 88, 808 90, 805 108" />
+    </svg>
+
+    <!-- Camera wrapper -->
+    <div class="s1-camera" id="s1-camera">
+      <div class="s1-content">
+        <!-- Phase 1 text: rhetorical question phrase -->
+        <div class="s1-phrase" id="s1-phrase">Un été qui sent les <em>airs de vacances</em>&nbsp;?</div>
+        <!-- Phase 2 text: brand name -->
+        <div class="s1-brand" id="s1-brand">BiotyfullBox</div>
+      </div>
+    </div>
+
+    <script>
+      const EASE = {
+        entry: "power2.out",
+        emphasis: "power2.inOut",
+        exit: "power2.in",
+        drift: "sine.inOut",
+      };
+      const DUR = {
+        snap: 0.18,
+        med: 0.5,
+        slow: 1.0,
+      };
+
+      window.__timelines = window.__timelines || {};
+
+      const camera = document.getElementById("s1-camera");
+      const phraseEl = document.getElementById("s1-phrase");
+      const brandEl = document.getElementById("s1-brand");
+      const botanicalSvg = document.getElementById("s1-botanical-svg");
+
+      // --- SVG path-draw setup ---
+      const arcPaths = botanicalSvg.querySelectorAll("path");
+      arcPaths.forEach(function(p) {
+        var len = p.getTotalLength();
+        p.style.strokeDasharray = "" + len;
+        p.style.strokeDashoffset = "" + len;
+      });
+
+      const TOTAL_DURATION = 6.827;
+
+      const tl = gsap.timeline({ paused: true });
+
+      // === MULTI-PHASE CAMERA ===
+      // Phase 1: pull-back wide → settled (0 → 2s)
+      // Phase 2: slow dolly-in hold (2s → end)
+      var phase = { scale: 1.06 }; // start slightly wide/pulled back
+
+      // Phase 2: settle to neutral at 0.3s
+      tl.to(phase, {
+        scale: 1.0,
+        duration: 1.8,
+        ease: EASE.emphasis,
+      }, 0.2);
+
+      // Phase 3: slow dolly-in push
+      tl.to(phase, {
+        scale: 1.05,
+        duration: 4.0,
+        ease: "power1.inOut",
+      }, 2.0);
+
+      // Drift overlay
+      var drift = { p: 0 };
+      tl.to(drift, {
+        p: Math.PI * 2 * 1.5,
+        duration: TOTAL_DURATION,
+        ease: "none",
+        onUpdate: function() {
+          var dx = Math.sin(drift.p) * 4;
+          var dy = Math.sin(drift.p * 1.3) * 2;
+          camera.style.transform = "scale(" + phase.scale + ") translate(" + dx + "px, " + dy + "px)";
+        },
+      }, 0);
+
+      // === DISCRETE TEXT SEQUENCE ===
+      // Beat 1: rhetorical phrase appears at ~0.5s (after camera settles begin)
+      tl.fromTo("#s1-phrase",
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: DUR.slow, ease: EASE.entry },
+        0.5
+      );
+
+      // Beat 2: brand name appears at ~2.2s (after phrase is settled)
+      // Small delay — stillness before brand stamp
+      tl.fromTo("#s1-brand",
+        { opacity: 0, y: 20, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: DUR.slow, ease: EASE.entry },
+        2.2
+      );
+
+      // === SVG PATH DRAW ===
+      // Botanical arc traces after brand name lands at ~3.2s
+      // Main arc
+      tl.to("#s1-arc-main", {
+        strokeDashoffset: 0,
+        duration: 0.9,
+        ease: "power2.out",
+      }, 3.2);
+
+      // Leaf 1
+      tl.to("#s1-leaf-1", {
+        strokeDashoffset: 0,
+        duration: 0.4,
+        ease: "power2.out",
+      }, 3.6);
+
+      // Leaf 2
+      tl.to("#s1-leaf-2", {
+        strokeDashoffset: 0,
+        duration: 0.4,
+        ease: "power2.out",
+      }, 3.8);
+
+      // Sprig 1
+      tl.to("#s1-sprig-1", {
+        strokeDashoffset: 0,
+        duration: 0.3,
+        ease: "power2.out",
+      }, 3.9);
+
+      // Sprig 2
+      tl.to("#s1-sprig-2", {
+        strokeDashoffset: 0,
+        duration: 0.3,
+        ease: "power2.out",
+      }, 4.05);
+
+      // === STILLNESS-BEFORE-CLIMAX ===
+      // At ~4.3s arc is complete, camera holds → 0.5s stillness window
+      // Brand name "stamp" fully resolved at ~4.8s
+
+      // === SINE-WAVE LOOP (breathing on brand name) ===
+      // Starts after brand entry fully settles (~3.3s) and breathes until end
+      var IDLE_START = 3.3;
+      var IDLE_DUR = TOTAL_DURATION - IDLE_START; // ~3.527s
+      var CYCLES = Math.floor(IDLE_DUR / 2.5); // ~1 cycle
+      var breathPhase = { p: 0 };
+
+      tl.to(breathPhase, {
+        p: Math.PI * 2 * Math.max(1, CYCLES),
+        duration: IDLE_DUR,
+        ease: "none",
+        onUpdate: function() {
+          var s = 1 + Math.sin(breathPhase.p) * 0.010;
+          var y = Math.sin(breathPhase.p) * 2.5;
+          brandEl.style.transform = "translateY(" + y + "px) scale(" + s + ")";
+        },
+      }, IDLE_START);
+
+      window.__timelines["scene_1"] = tl;
+    </script>
+  </div>
+</template>

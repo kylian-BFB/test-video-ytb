@@ -1,0 +1,408 @@
+<template id="scene_2-template">
+  <div id="root" class="scene_2-root" data-composition-id="scene_2" data-width="1920" data-height="1080" data-duration="10.005" style="position:relative; width:1920px; height:1080px; overflow:hidden;">
+    <style>
+      #root {
+        background: var(--canvas);
+        font-family: var(--font-body);
+      }
+      #root *,
+      #root *::before,
+      #root *::after {
+        box-sizing: border-box;
+      }
+
+      /* Ambient mesh background — full-bleed, decorative */
+      .s2-mesh-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .s2-blob {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.13;
+        filter: blur(90px);
+      }
+      .s2-blob-1 {
+        width: 700px; height: 700px;
+        background: var(--brand-primary);
+        top: -120px; left: -100px;
+      }
+      .s2-blob-2 {
+        width: 600px; height: 600px;
+        background: var(--brand-secondary);
+        bottom: -80px; right: -60px;
+      }
+      .s2-blob-3 {
+        width: 500px; height: 500px;
+        background: var(--brand-accent);
+        top: 200px; right: 300px;
+      }
+
+      /* Camera wrapper — dolly-in via GSAP scale */
+      .s2-camera {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        z-index: 1;
+        transform-origin: 50% 50%;
+        will-change: transform;
+      }
+
+      /* Scene composition container */
+      .s2-stage {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 1920px;
+        height: 1080px;
+      }
+
+      /* Hero card — shot 1 state: ~50% canvas height = 540px, ~480px wide */
+      .s2-hero-card {
+        position: relative;
+        width: 600px;
+        height: 530px;
+        border-radius: var(--radius-card-lg);
+        background: var(--brand-secondary);
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+        z-index: 2;
+        will-change: transform;
+      }
+
+      /* Card content — old (Phase 1: title) */
+      .s2-card-content-old {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: var(--pad-card-lg);
+        opacity: 1;
+      }
+
+      .s2-eyebrow {
+        font-family: var(--font-mono);
+        font-size: 14px;
+        letter-spacing: 0.08em;
+        color: var(--ink);
+        opacity: 0.65;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .s2-card-headline {
+        font-family: var(--font-display);
+        font-size: 46px;
+        font-weight: 500;
+        line-height: 1.15;
+        color: var(--ink);
+        text-align: center;
+        max-width: 480px;
+      }
+
+      .s2-card-headline em {
+        font-style: italic;
+      }
+
+      /* Card content — new (Phase 2: stat block revealed at ~5s) */
+      .s2-card-content-new {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 48px;
+        opacity: 0;
+      }
+
+      .s2-stat-wrap {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .s2-stat-number {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 80px;
+        color: var(--ink);
+        font-variant-numeric: tabular-nums;
+        line-height: 1;
+        letter-spacing: -2px;
+        will-change: transform;
+      }
+
+      .s2-stat-label {
+        font-family: var(--font-body);
+        font-size: 18px;
+        color: var(--ink);
+        opacity: 0.75;
+        margin-top: 12px;
+        text-align: center;
+        max-width: 320px;
+      }
+
+      /* Body copy beneath the hero card */
+      .s2-body-copy {
+        font-family: var(--font-body);
+        font-size: 20px;
+        color: var(--ink);
+        opacity: 0;
+        margin-top: 28px;
+        text-align: center;
+        letter-spacing: 0.01em;
+        z-index: 2;
+        position: relative;
+      }
+
+      /* Chips burst layer — positioned absolute over stage */
+      .s2-chips-layer {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        pointer-events: none;
+        z-index: 3;
+      }
+
+      .s2-chip {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        /* centering handled by xPercent/yPercent GSAP */
+        width: 140px;
+        height: 52px;
+        border-radius: var(--radius-pill);
+        background: var(--surface-card);
+        border: 1.5px solid color-mix(in srgb, var(--ink) 12%, transparent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-body);
+        font-size: 13px;
+        color: var(--ink);
+        font-weight: 500;
+        opacity: 0;
+        will-change: transform;
+        white-space: nowrap;
+        padding: 0 18px;
+      }
+    </style>
+
+    <!-- Ambient mesh background (decorative, full-bleed) -->
+    <div class="s2-mesh-bg">
+      <div class="s2-blob s2-blob-1"></div>
+      <div class="s2-blob s2-blob-2"></div>
+      <div class="s2-blob s2-blob-3"></div>
+    </div>
+
+    <!-- Camera wrapper for dolly-in -->
+    <div class="s2-camera" id="s2-camera">
+      <div class="s2-stage">
+        <!-- Hero card -->
+        <div class="s2-hero-card" id="s2-hero-card">
+          <!-- Shot 1: title content -->
+          <div class="s2-card-content-old" id="s2-card-old">
+            <div class="s2-eyebrow">Découvrez</div>
+            <div class="s2-card-headline">Box Beauté Naturelle <em>Été</em></div>
+          </div>
+
+          <!-- Shot 2: stat block (revealed after card-morph-anchor) -->
+          <div class="s2-card-content-new" id="s2-card-new">
+            <div class="s2-stat-wrap">
+              <span class="s2-stat-number" id="s2-stat-number">1</span>
+            </div>
+            <div class="s2-stat-label">produits sélectionnés</div>
+          </div>
+        </div>
+
+        <!-- Body copy below card -->
+        <div class="s2-body-copy" id="s2-body-copy">produits naturels et bio</div>
+      </div>
+
+      <!-- Product chips — burst out from card center -->
+      <div class="s2-chips-layer">
+        <div class="s2-chip" id="s2-chip-0" data-tx="-340" data-ty="-240">Sérum éclat</div>
+        <div class="s2-chip" id="s2-chip-1" data-tx="340" data-ty="-240">Nettoyant visage</div>
+        <div class="s2-chip" id="s2-chip-2" data-tx="-380" data-ty="0">Soin solaire</div>
+        <div class="s2-chip" id="s2-chip-3" data-tx="380" data-ty="0">Gloss naturel</div>
+        <div class="s2-chip" id="s2-chip-4" data-tx="-340" data-ty="240">Vernis bio</div>
+        <div class="s2-chip" id="s2-chip-5" data-tx="340" data-ty="240">Déodorant doux</div>
+        <div class="s2-chip" id="s2-chip-6" data-tx="0" data-ty="-320">Lait capillaire</div>
+      </div>
+    </div>
+
+    <script>
+      const EASE = {
+        entry: "power2.out",
+        emphasis: "power2.inOut",
+        exit: "power2.in",
+        drift: "sine.inOut",
+      };
+      const DUR = {
+        snap: 0.18,
+        med: 0.5,
+        slow: 1.0,
+      };
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // ── Phase 0: Hero card entry (0 → 0.7s) ──────────────────────────────
+      tl.fromTo(
+        "#s2-hero-card",
+        { scale: 0.82, opacity: 0, y: 30 },
+        { scale: 1, opacity: 1, y: 0, duration: 0.9, ease: EASE.entry },
+        0
+      );
+
+      // ── center-outward-expansion: 7 chips burst from card center ──────────
+      // Chips start visually overlapping card center; stagger ≤ 400ms total
+      // 7 chips × 0.055s stagger = 385ms total stagger ≤ 400ms
+      const chips = document.querySelectorAll(".s2-chip");
+      chips.forEach((chip, i) => {
+        const tx = Number(chip.dataset.tx);
+        const ty = Number(chip.dataset.ty);
+        tl.fromTo(
+          chip,
+          { xPercent: -50, yPercent: -50, x: 0, y: 0, scale: 0.55, opacity: 0 },
+          {
+            x: tx,
+            y: ty,
+            scale: 1,
+            opacity: 1,
+            duration: 1.3,
+            ease: "power3.out",
+          },
+          0.5 + i * 0.055
+        );
+      });
+
+      // ── card-morph-anchor: morph hero card at ~5s ────────────────────────
+      // Phase 1 morph: card shrinks and changes color slightly (keeps brand-secondary)
+      const MORPH_START = 5.0;
+      const MORPH_DUR = 0.85;
+      const SHOT_TWO_W = 420;
+      const SHOT_TWO_H = 360;
+      const OLD_FADE_FRAC = 0.4;
+      const NEW_FADE_FRAC = 0.4;
+
+      tl.to(
+        "#s2-hero-card",
+        {
+          width: SHOT_TWO_W,
+          height: SHOT_TWO_H,
+          borderRadius: 28,
+          duration: MORPH_DUR,
+          ease: "power2.inOut",
+        },
+        MORPH_START
+      );
+
+      // Old content fades out at start of morph
+      tl.to(
+        "#s2-card-old",
+        {
+          opacity: 0,
+          duration: MORPH_DUR * OLD_FADE_FRAC,
+          ease: "power1.in",
+        },
+        MORPH_START
+      );
+
+      // New content (stat block) fades in during last portion of morph
+      tl.to(
+        "#s2-card-new",
+        {
+          opacity: 1,
+          duration: MORPH_DUR * NEW_FADE_FRAC,
+          ease: "power1.out",
+        },
+        MORPH_START + MORPH_DUR * (1 - NEW_FADE_FRAC)
+      );
+
+      // Body copy fades in when new content appears
+      tl.to(
+        "#s2-body-copy",
+        {
+          opacity: 0.7,
+          y: 0,
+          duration: DUR.slow,
+          ease: EASE.entry,
+        },
+        MORPH_START + MORPH_DUR * 0.6
+      );
+
+      // ── counting-dynamic-scale: count 1→7 with font growing ──────────────
+      // Starts at morph end, duration 1.8s
+      const COUNT_START = MORPH_START + MORPH_DUR;
+      const COUNT_DUR = 1.8;
+      const START_SIZE = 80;
+      const END_SIZE = 148;
+
+      const statEl = document.getElementById("s2-stat-number");
+      const countState = { value: 1, fontSize: START_SIZE };
+
+      tl.to(
+        countState,
+        {
+          value: 7,
+          fontSize: END_SIZE,
+          duration: COUNT_DUR,
+          ease: "power3.out",
+          onUpdate: () => {
+            statEl.textContent = Math.round(countState.value).toLocaleString();
+            statEl.style.fontSize = countState.fontSize + "px";
+          },
+        },
+        COUNT_START
+      );
+
+      // ── sine-wave-loop: hero card breathes as the sole secondary live element ──
+      // Begins after count lands, runs to end of scene
+      const IDLE_START = COUNT_START + COUNT_DUR + 0.1;
+      const IDLE_DUR = 10.005 - IDLE_START;
+      const CYCLES = Math.max(1, Math.floor(IDLE_DUR / 2.8));
+
+      const idlePhase = { p: 0 };
+      tl.to(
+        idlePhase,
+        {
+          p: Math.PI * 2 * CYCLES,
+          duration: IDLE_DUR,
+          ease: "none",
+          onUpdate: () => {
+            // Hero card: scale breathes ±0.010
+            const scale = 1 + Math.sin(idlePhase.p) * 0.010;
+            const y = Math.sin(idlePhase.p) * 2.5;
+            document.getElementById("s2-hero-card").style.transform =
+              "translateY(" + y + "px) scale(" + scale + ")";
+          },
+        },
+        IDLE_START
+      );
+
+      // ── Macro motion: slow dolly-in on camera wrapper throughout ──────────
+      // scale 1.0 → 1.04 over 10s (subtle depth push)
+      tl.fromTo(
+        "#s2-camera",
+        { scale: 1.0 },
+        { scale: 1.04, duration: 10.005, ease: "none" },
+        0
+      );
+
+      window.__timelines["scene_2"] = tl;
+    </script>
+  </div>
+</template>

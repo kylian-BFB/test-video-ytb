@@ -1,0 +1,492 @@
+<template id="scene_4-template">
+  <div id="root" class="scene_4-root" data-composition-id="scene_4" data-width="1920" data-height="1080" data-duration="10.88" style="position:relative; width:1920px; height:1080px; overflow:hidden;">
+
+    <style>
+      #root {
+        background: var(--canvas);
+        font-family: var(--font-body);
+      }
+      #root *,
+      #root *::before,
+      #root *::after {
+        box-sizing: border-box;
+      }
+
+      /* Ambient mesh background — three subtle blobs */
+      .s4-mesh {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .s4-blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.18;
+      }
+      .s4-blob-1 {
+        width: 700px;
+        height: 700px;
+        background: var(--brand-primary);
+        top: -200px;
+        left: -150px;
+      }
+      .s4-blob-2 {
+        width: 600px;
+        height: 600px;
+        background: var(--brand-secondary);
+        bottom: -180px;
+        right: -100px;
+      }
+      .s4-blob-3 {
+        width: 500px;
+        height: 500px;
+        background: var(--brand-accent);
+        top: 200px;
+        right: 300px;
+        opacity: 0.12;
+      }
+
+      /* SVG sun-ray arc — background ornament */
+      .s4-sun-arc {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 900px;
+        height: 900px;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        pointer-events: none;
+      }
+      .s4-sun-arc path,
+      .s4-sun-arc circle {
+        fill: none;
+        stroke: var(--brand-accent);
+        stroke-width: 2.5;
+        stroke-linecap: round;
+        stroke-dasharray: 8 14;
+        opacity: 0.55;
+      }
+
+      /* Stage for split cards */
+      .s4-stage-wrap {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        perspective: 1600px;
+        z-index: 2;
+      }
+      .s4-stage {
+        display: flex;
+        gap: 60px;
+        transform-style: preserve-3d;
+        will-change: transform;
+      }
+
+      /* Card base */
+      .s4-card {
+        width: 680px;
+        min-height: 540px;
+        padding: 56px 48px;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        border-radius: var(--radius-card-lg);
+        transform-style: preserve-3d;
+        will-change: transform;
+        position: relative;
+      }
+      .s4-card-left {
+        background: var(--canvas);
+        border: var(--rule-solid);
+        box-shadow: -20px 24px 60px rgba(0,0,0,0.08);
+      }
+      .s4-card-right {
+        background: var(--brand-secondary);
+        border: 1px solid color-mix(in srgb, var(--brand-secondary) 60%, transparent);
+        box-shadow: 20px 24px 60px rgba(0,0,0,0.10);
+      }
+
+      /* Card content */
+      .s4-eyebrow {
+        font-family: var(--font-mono);
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        color: var(--ink);
+        opacity: 0.7;
+        text-transform: none;
+      }
+      .s4-headline {
+        font-family: var(--font-display);
+        font-size: 72px;
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+      }
+      .s4-headline em {
+        font-style: italic;
+      }
+      .s4-body {
+        font-family: var(--font-body);
+        font-size: 28px;
+        font-weight: 400;
+        line-height: 1.35;
+        color: var(--ink);
+        opacity: 0.75;
+        max-width: 560px;
+      }
+
+      /* UV pill badge — inner edge of left card */
+      .s4-pill-wrap {
+        position: absolute;
+        right: -40px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+      }
+      .s4-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--brand-primary);
+        color: var(--ink);
+        font-family: var(--font-body);
+        font-size: 20px;
+        font-weight: 600;
+        padding: 12px 24px;
+        border-radius: var(--radius-pill);
+        white-space: nowrap;
+        box-shadow: 0 4px 20px rgba(0,180,204,0.25);
+      }
+      .s4-pill-sun {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--ink);
+        opacity: 0.7;
+        flex-shrink: 0;
+      }
+
+      /* ASR phrase — keyword glow words */
+      .s4-asr-phrase {
+        position: absolute;
+        bottom: 80px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+        flex-wrap: wrap;
+        z-index: 3;
+        pointer-events: none;
+      }
+      .s4-word {
+        display: inline-block;
+        font-family: var(--font-display);
+        font-size: 36px;
+        font-weight: 500;
+        color: var(--ink);
+        opacity: 0;
+        transform-origin: 50% 50%;
+        will-change: transform, text-shadow;
+        letter-spacing: 0.02em;
+      }
+      .s4-word.s4-kw-brand {
+        color: var(--brand-primary);
+        font-weight: 700;
+      }
+    </style>
+
+    <!-- Ambient mesh -->
+    <div class="s4-mesh">
+      <div class="s4-blob s4-blob-1"></div>
+      <div class="s4-blob s4-blob-2"></div>
+      <div class="s4-blob s4-blob-3"></div>
+    </div>
+
+    <!-- SVG dashed sun-ray arc — background ornament -->
+    <svg class="s4-sun-arc" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Large arc radiating from center-right — sun ray suggestion -->
+      <path id="s4-arc-1" d="M 450 450 Q 650 200 820 80" />
+      <path id="s4-arc-2" d="M 450 450 Q 750 320 880 220" />
+      <path id="s4-arc-3" d="M 450 450 Q 700 430 860 400" />
+      <path id="s4-arc-4" d="M 450 450 Q 680 550 820 620" />
+      <path id="s4-arc-5" d="M 450 450 Q 600 650 700 780" />
+      <!-- Small sun circle ornament -->
+      <circle id="s4-sun-dot" cx="450" cy="450" r="36" />
+    </svg>
+
+    <!-- Split-tilt card stage -->
+    <div class="s4-stage-wrap">
+      <div class="s4-stage" id="s4-stage">
+
+        <!-- Left card: canvas fill, UV protection, +12° rotateY -->
+        <div class="s4-card s4-card-left" id="s4-card-left">
+          <div class="s4-eyebrow" id="s4-eyebrow-left">Soin solaire capillaire</div>
+          <div class="s4-headline" id="s4-headline-left">Protection<br><em>soleil</em> &amp; UV</div>
+          <div class="s4-body" id="s4-body-left">Un bouclier naturel pour les cheveux exposés à la chaleur estivale.</div>
+          <!-- UV pill at inner (right) edge -->
+          <div class="s4-pill-wrap" id="s4-pill-wrap">
+            <div class="s4-pill">
+              <div class="s4-pill-sun"></div>
+              UV protect
+            </div>
+          </div>
+        </div>
+
+        <!-- Right card: brand-secondary pink fill, Skin Restore Tîtl, -12° rotateY -->
+        <div class="s4-card s4-card-right" id="s4-card-right">
+          <div class="s4-eyebrow" id="s4-eyebrow-right">Tîtl</div>
+          <div class="s4-headline" id="s4-headline-right">Skin Restore<br><em>Tîtl</em></div>
+          <div class="s4-body" id="s4-body-right">Formule légère qui répare et nourrit sans alourdir — conçue pour l'été.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ASR keyword phrase — bottom of frame -->
+    <div class="s4-asr-phrase" id="s4-asr-phrase">
+      <span class="s4-word" data-word="protege">Protège</span>
+      <span class="s4-word" data-word="du">du</span>
+      <span class="s4-word s4-kw-brand" data-word="soleil">soleil</span>
+      <span class="s4-word" data-word="et">et</span>
+      <span class="s4-word s4-kw-brand" data-word="UV">UV</span>
+    </div>
+
+    <script>
+      const EASE = {
+        entry: "power2.out",
+        emphasis: "power2.inOut",
+        exit: "power2.in",
+        drift: "sine.inOut",
+      };
+      const DUR = {
+        snap: 0.18,
+        med: 0.5,
+        slow: 1.0,
+      };
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // ── SVG path-draw setup ──────────────────────────────────────
+      const arcPaths = document.querySelectorAll("#s4-arc-1, #s4-arc-2, #s4-arc-3, #s4-arc-4, #s4-arc-5");
+      arcPaths.forEach((p) => {
+        const len = p.getTotalLength();
+        p.style.strokeDasharray = String(len);
+        p.style.strokeDashoffset = String(len);
+      });
+      const sunDot = document.getElementById("s4-sun-dot");
+      const sunDotLen = sunDot.getTotalLength ? sunDot.getTotalLength() : 226;
+      sunDot.style.strokeDasharray = String(sunDotLen);
+      sunDot.style.strokeDashoffset = String(sunDotLen);
+
+      // ── Phase 1: Card entries (0 → 0.9s) ────────────────────────
+      // Left card: slide in from left, settle at +12° rotateY
+      tl.fromTo(
+        "#s4-card-left",
+        { x: -460, rotation: 0, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.9, ease: EASE.entry },
+        0,
+      );
+      // Right card: slide in from right, settle at -12° rotateY
+      tl.fromTo(
+        "#s4-card-right",
+        { x: 460, rotation: 0, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.9, ease: EASE.entry },
+        0.15,
+      );
+      // Set 3D tilts after entry (GSAP owns transform, so set rotation via GSAP)
+      tl.set("#s4-card-left", { rotationY: 12 }, 0.92);
+      tl.set("#s4-card-right", { rotationY: -12 }, 0.92);
+
+      // ── Phase 2: Copy reveal stagger (1.0 → 1.6s) ───────────────
+      tl.fromTo(
+        "#s4-eyebrow-left, #s4-headline-left, #s4-body-left",
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, stagger: 0.08, duration: DUR.med, ease: EASE.entry },
+        1.0,
+      );
+      tl.fromTo(
+        "#s4-eyebrow-right, #s4-headline-right, #s4-body-right",
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, stagger: 0.08, duration: DUR.med, ease: EASE.entry },
+        1.1,
+      );
+
+      // ── Phase 3: UV pill badge pops in (1.3s) ───────────────────
+      tl.fromTo(
+        "#s4-pill-wrap",
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: DUR.med, ease: EASE.entry },
+        1.3,
+      );
+
+      // ── Phase 4: SVG sun-ray arc draws (1.5 → 3.5s) ─────────────
+      // Draw sun dot first
+      tl.to(
+        "#s4-sun-dot",
+        { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" },
+        1.5,
+      );
+      // Then draw rays with stagger
+      tl.to(
+        "#s4-arc-1",
+        { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" },
+        1.7,
+      );
+      tl.to(
+        "#s4-arc-2",
+        { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" },
+        1.95,
+      );
+      tl.to(
+        "#s4-arc-3",
+        { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" },
+        2.2,
+      );
+      tl.to(
+        "#s4-arc-4",
+        { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" },
+        2.45,
+      );
+      tl.to(
+        "#s4-arc-5",
+        { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" },
+        2.7,
+      );
+
+      // ── Phase 5: ASR keyword glow phrase fades in (1.8s) ────────
+      tl.fromTo(
+        ".s4-word",
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, stagger: 0.07, duration: DUR.med, ease: EASE.entry },
+        1.8,
+      );
+
+      // ASR envelope driver — highlights "soleil" and "UV"
+      const SCENE_DURATION = 10.88;
+      const ATTACK_DUR = 0.15;
+      const RELEASE = 0.35;
+      const REST_LEVEL = 0.1;
+      const MAX_BLUR = 28;
+      const MAX_SCALE_BOOST = 0.14;
+      // REST_RGB dim, ACTIVE_RGB mid-ink, BRAND_RGB turquoise
+      const REST_RGB  = { r: 45,  g: 106, b: 106 }; // --ink
+      const ACTIVE_RGB = { r: 45,  g: 106, b: 106 }; // --ink full
+      const BRAND_RGB  = { r: 0,   g: 180, b: 204 }; // --brand-primary
+
+      const TIMINGS = {
+        soleil: { start: 2.2,  end: 3.2  },
+        UV:     { start: 4.8,  end: 5.8  },
+      };
+
+      function envelope(time, start, end) {
+        const releaseEnd = end + RELEASE;
+        if (time < start) return 0;
+        if (time < end) {
+          return Math.min((time - start) / ATTACK_DUR, 1);
+        }
+        if (time < releaseEnd) {
+          const decay = (time - end) / RELEASE;
+          return 1 - decay * (1 - REST_LEVEL);
+        }
+        return REST_LEVEL;
+      }
+
+      function lerpCh(a, b, t) {
+        return Math.round(a + (b - a) * t);
+      }
+      function colorAt(env, isBrand) {
+        const target = isBrand ? BRAND_RGB : ACTIVE_RGB;
+        return `rgb(${lerpCh(REST_RGB.r, target.r, env)}, ${lerpCh(REST_RGB.g, target.g, env)}, ${lerpCh(REST_RGB.b, target.b, env)})`;
+      }
+
+      const words = document.querySelectorAll(".s4-word");
+      const asrDriver = { t: 0 };
+
+      tl.to(
+        asrDriver,
+        {
+          t: SCENE_DURATION,
+          duration: SCENE_DURATION,
+          ease: "none",
+          onUpdate: () => {
+            words.forEach((el) => {
+              const key = el.dataset.word;
+              const timing = TIMINGS[key];
+              if (!timing) return;
+              const env = envelope(asrDriver.t, timing.start, timing.end);
+              const blur = MAX_BLUR * env;
+              const scale = 1 + MAX_SCALE_BOOST * env;
+              const isBrand = el.classList.contains("s4-kw-brand");
+              el.style.textShadow = `0 0 ${blur}px rgba(0,180,204,${0.1 + env * 0.75})`;
+              el.style.transform = `scale(${scale})`;
+              el.style.color = colorAt(env, isBrand);
+            });
+          },
+        },
+        0,
+      );
+
+      // ── Phase 6: Antiphase sine-wave breathing (2.0 → 10.88s) ───
+      // Both cards breathe in opposition (Math.PI offset)
+      const IDLE_START = 1.95;
+      const IDLE_DUR = SCENE_DURATION - IDLE_START; // ~8.93s
+      const CYCLES = 3; // ~2.98s per breath — natural cadence
+      const SCALE_AMP = 0.010;
+      const Y_AMP_PX = 3;
+
+      const phaseL = { p: 0 };
+      const phaseR = { p: Math.PI }; // antiphase offset
+
+      tl.to(
+        phaseL,
+        {
+          p: Math.PI * 2 * CYCLES,
+          duration: IDLE_DUR,
+          ease: "none",
+          onUpdate: () => {
+            const scaleL = 1 + Math.sin(phaseL.p) * SCALE_AMP;
+            const yL = Math.sin(phaseL.p) * Y_AMP_PX;
+            // Preserve rotationY=12 set earlier via GSAP
+            gsap.set("#s4-card-left", { rotationY: 12, y: yL, scale: scaleL });
+          },
+        },
+        IDLE_START,
+      );
+
+      tl.to(
+        phaseR,
+        {
+          p: Math.PI + Math.PI * 2 * CYCLES,
+          duration: IDLE_DUR,
+          ease: "none",
+          onUpdate: () => {
+            const scaleR = 1 + Math.sin(phaseR.p) * SCALE_AMP;
+            const yR = Math.sin(phaseR.p) * Y_AMP_PX;
+            gsap.set("#s4-card-right", { rotationY: -12, y: yR, scale: scaleR });
+          },
+        },
+        IDLE_START,
+      );
+
+      // ── Macro motion: slow dolly-in (scale stage 1.0 → 1.04) ────
+      tl.fromTo(
+        "#s4-stage",
+        { scale: 1.0 },
+        { scale: 1.04, duration: SCENE_DURATION, ease: "none" },
+        0,
+      );
+
+      window.__timelines["scene_4"] = tl;
+    </script>
+
+  </div>
+</template>
