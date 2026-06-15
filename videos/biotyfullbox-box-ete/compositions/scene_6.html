@@ -1,0 +1,543 @@
+<template id="scene_6-template">
+  <div id="root" class="scene_6-root" data-composition-id="scene_6" data-width="1920" data-height="1080" data-duration="13.632" style="position:relative; width:1920px; height:1080px; overflow:hidden;">
+    <style>
+      #root {
+        background: var(--canvas);
+        font-family: var(--font-body);
+      }
+      #root *,
+      #root *::before,
+      #root *::after {
+        box-sizing: border-box;
+      }
+
+      /* Ambient brand-color mesh background — full-bleed, three soft blobs */
+      .s6-mesh {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .s6-blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.18;
+      }
+      .s6-blob-1 {
+        width: 800px; height: 800px;
+        background: var(--brand-primary);
+        top: -200px; left: -150px;
+      }
+      .s6-blob-2 {
+        width: 700px; height: 700px;
+        background: var(--brand-secondary);
+        bottom: -180px; right: 100px;
+      }
+      .s6-blob-3 {
+        width: 500px; height: 500px;
+        background: var(--brand-accent);
+        top: 200px; left: 700px;
+        opacity: 0.12;
+      }
+
+      /* Stage: center-aligned full canvas area for card placement */
+      .s6-stage {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+      }
+
+      /* Vernis card — Phase 1: right-anchored large card; Phase 2+: compact left rail */
+      .s6-vernis-card {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+        padding: var(--pad-card-lg);
+        border-radius: var(--radius-card-lg);
+        background: var(--brand-secondary);
+        will-change: transform, opacity;
+        overflow: hidden;
+      }
+
+      /* Déodorant card — enters Phase 2, center */
+      .s6-deo-card {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+        padding: var(--pad-card-lg);
+        border-radius: var(--radius-card-lg);
+        background: var(--surface-card);
+        border: var(--rule-solid);
+        will-change: transform, opacity;
+      }
+
+      /* Card text styles */
+      .s6-eyebrow {
+        font-family: var(--font-mono);
+        font-size: 18px;
+        letter-spacing: 0.1em;
+        color: var(--ink);
+        opacity: 0.7;
+        text-transform: none;
+      }
+      .s6-card-title {
+        font-family: var(--font-display);
+        font-size: 72px;
+        font-weight: 400;
+        line-height: 1.1;
+        color: var(--ink);
+        letter-spacing: -0.5px;
+      }
+      .s6-card-body {
+        font-family: var(--font-body);
+        font-size: 22px;
+        line-height: 1.5;
+        color: var(--ink);
+        opacity: 0.8;
+        max-width: 360px;
+      }
+
+      /* Glow words */
+      .s6-word {
+        display: inline-block;
+        transform-origin: 50% 50%;
+        will-change: transform, text-shadow;
+      }
+
+      /* Phase 3: lower display band for brand names revealed via discrete-text-sequence */
+      .s6-brand-band {
+        position: absolute;
+        bottom: 80px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        gap: 60px;
+        opacity: 0;
+        will-change: opacity, transform;
+      }
+      .s6-brand-name {
+        font-family: var(--font-display);
+        font-size: 56px;
+        font-weight: 400;
+        color: var(--ink);
+        letter-spacing: -0.5px;
+      }
+      .s6-brand-dot {
+        font-family: var(--font-body);
+        font-size: 28px;
+        color: var(--brand-primary);
+        opacity: 0.5;
+      }
+
+      /* Phase 3 discrete sequence text — a lower strip showing brand names one-by-one */
+      .s6-seq-text {
+        font-family: var(--font-display);
+        font-size: 54px;
+        font-weight: 400;
+        color: var(--ink);
+        letter-spacing: -0.5px;
+        text-align: center;
+      }
+
+      /* Slow dolly-in: outer wrapper scales from 1.0 to ~1.04 over full duration */
+      .s6-dolly {
+        position: absolute;
+        inset: 0;
+        transform-origin: 50% 50%;
+        will-change: transform;
+      }
+    </style>
+
+    <!-- Ambient mesh background -->
+    <div class="s6-mesh">
+      <div class="s6-blob s6-blob-1"></div>
+      <div class="s6-blob s6-blob-2"></div>
+      <div class="s6-blob s6-blob-3"></div>
+    </div>
+
+    <!-- Dolly wrapper for slow scale-in -->
+    <div class="s6-dolly" id="s6-dolly">
+      <!-- Stage for card placement -->
+      <div class="s6-stage" id="s6-stage">
+
+        <!-- Vernis card (victim / Phase 1 primary → Phase 2 rail) -->
+        <div class="s6-vernis-card" id="s6-vernis-card">
+          <div class="s6-eyebrow">Beauty Nails</div>
+          <div class="s6-card-title">Vernis <em>turquoise</em></div>
+          <div class="s6-card-body">
+            <span class="s6-word" data-word="turquoise">Turquoise</span> nacré,
+            formule longue tenue.
+          </div>
+        </div>
+
+        <!-- Déodorant card (intruder / Phase 2 primary) -->
+        <div class="s6-deo-card" id="s6-deo-card">
+          <div class="s6-eyebrow">Mymosa</div>
+          <div class="s6-card-title">Déodorant <em>naturel</em></div>
+          <div class="s6-card-body">
+            Douceur <span class="s6-word" data-word="naturel">naturelle</span>,
+            efficacité prouvée.
+          </div>
+        </div>
+
+      </div><!-- .s6-stage -->
+    </div><!-- .s6-dolly -->
+
+    <!-- Phase 3 brand name band (outside dolly so it has its own positioning) -->
+    <div class="s6-brand-band" id="s6-brand-band">
+      <span class="s6-brand-name" id="s6-seq-brand"></span>
+    </div>
+
+    <script>
+      const EASE = {
+        entry: "power2.out",
+        emphasis: "power2.inOut",
+        exit: "power2.in",
+        drift: "sine.inOut",
+      };
+      const DUR = {
+        snap: 0.18,
+        med: 0.5,
+        slow: 1.0,
+      };
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // ─── Layout constants ────────────────────────────────────────────
+      // Canvas 1920×1080
+      // Phase 1: vernis card — right-anchored large card
+      //   Width 560px, Height 420px, centered vertically (~330px top)
+      //   Left = 1920 - 80 - 560 = 1280
+      const CARD_W_LG    = 560;
+      const CARD_H_LG    = 420;
+      const CARD_TOP_CTR = (1080 - CARD_H_LG) / 2; // 330
+
+      // Phase 2 rail: vernis compacts to smaller left tile
+      //   Width 360px, Height 260px, left = 80px, top centered (~410px)
+      const CARD_W_SM  = 360;
+      const CARD_H_SM  = 260;
+      const RAIL_LEFT  = 80;
+      const RAIL_TOP   = (1080 - CARD_H_SM) / 2;   // 410
+
+      // Phase 2: deo card — center safe zone
+      //   Width 580px, Height 440px, centered
+      const DEO_W   = 580;
+      const DEO_H   = 440;
+      const DEO_LEFT = (1920 - DEO_W) / 2;  // 670
+      const DEO_TOP  = (1080 - DEO_H) / 2;  // 320
+
+      // Stage width for reactive-displacement off-stage offsets
+      const STAGE_W = 1920;
+
+      // ─── Initial state ───────────────────────────────────────────────
+      // Vernis card: Phase 1 position (right anchored)
+      gsap.set("#s6-vernis-card", {
+        left:    1280,
+        top:     CARD_TOP_CTR,
+        width:   CARD_W_LG,
+        height:  CARD_H_LG,
+        opacity: 0,
+        x: 60,
+      });
+
+      // Deo card: off-stage right, hidden
+      gsap.set("#s6-deo-card", {
+        left:    DEO_LEFT,
+        top:     DEO_TOP,
+        width:   DEO_W,
+        height:  DEO_H,
+        opacity: 0,
+        x: STAGE_W,
+      });
+
+      // Brand band: hidden initially
+      gsap.set("#s6-brand-band", { opacity: 0, y: 20 });
+
+      // Dolly: start at rest (slow scale driven later)
+      gsap.set("#s6-dolly", { scale: 1 });
+
+      // ─── Phase 1 (0–5s): Vernis card entry ──────────────────────────
+      // Vernis card fades in from right
+      tl.fromTo(
+        "#s6-vernis-card",
+        { opacity: 0, x: 60 },
+        { opacity: 1, x: 0, duration: DUR.slow, ease: EASE.entry },
+        0,
+      );
+
+      // ─── ASR keyword glow Phase 1: "turquoise" at ~1.8s ────────────
+      const SCENE_DUR = 13.632;
+      const ATTACK_DUR = 0.15;
+      const RELEASE    = 0.35;
+      const REST_LEVEL = 0.2;
+      const MAX_BLUR        = 20;
+      const MAX_SCALE_BOOST = 0.07;
+
+      // Karaoke-style colors
+      const REST_RGB   = { r: 45,  g: 106, b: 106 };  // --ink
+      const ACTIVE_RGB = { r: 0,   g: 180, b: 204 };  // --brand-primary
+      const BRAND_RGB  = { r: 249, g: 168, b: 212 };  // --brand-secondary
+
+      function lerpCh(a, b, t) { return Math.round(a + (b - a) * t); }
+      function colorAt(env, isBrand) {
+        const tgt = isBrand ? BRAND_RGB : ACTIVE_RGB;
+        return `rgb(${lerpCh(REST_RGB.r,tgt.r,env)},${lerpCh(REST_RGB.g,tgt.g,env)},${lerpCh(REST_RGB.b,tgt.b,env)})`;
+      }
+      function glowRgba(env) {
+        return `rgba(0,180,204,${0.1 + env * 0.6})`;
+      }
+      function envelope(time, start, end) {
+        const releaseEnd = end + RELEASE;
+        if (time < start) return 0;
+        if (time < end) return Math.min((time - start) / ATTACK_DUR, 1);
+        if (time < releaseEnd) {
+          const decay = (time - end) / RELEASE;
+          return 1 - decay * (1 - REST_LEVEL);
+        }
+        return REST_LEVEL;
+      }
+
+      // TIMINGS: turquoise narrated ~1.5–2.2s; naturel narrated ~6.5–7.2s
+      const TIMINGS = {
+        turquoise: { start: 1.5, end: 2.2 },
+        naturel:   { start: 6.5, end: 7.2 },
+      };
+
+      // Single driver for all ASR glow (full scene)
+      const asrDriver = { t: 0 };
+      tl.to(
+        asrDriver,
+        {
+          t: SCENE_DUR,
+          duration: SCENE_DUR,
+          ease: "none",
+          onUpdate: () => {
+            const words = document.querySelectorAll(".s6-word");
+            words.forEach((el) => {
+              const key = el.dataset.word;
+              const timing = TIMINGS[key];
+              if (!timing) return;
+              const env = envelope(asrDriver.t, timing.start, timing.end);
+              const blur = MAX_BLUR * env;
+              const scale = 1 + MAX_SCALE_BOOST * env;
+              el.style.textShadow = `0 0 ${blur}px ${glowRgba(env)}`;
+              el.style.transform  = `scale(${scale})`;
+              el.style.color      = colorAt(env, false);
+            });
+          },
+        },
+        0,
+      );
+
+      // ─── Phase 2 (5–10s): Reactive displacement ─────────────────────
+      // At t=5s, the deo card (intruder) springs in from the right
+      // and the vernis card (victim) is displaced to the left rail.
+      // Single driver — both motions derived from one spring
+      const DRIVER_DUR      = 0.9;
+      const BOUNCE_FACTOR   = 1.5;
+      const VICTIM_FRACTION = 0.45;
+      const FADE_IN_SHARP   = 4;
+      const DRIVER_AT       = 5.0;
+
+      // Target positions: vernis to left rail
+      const VICTIM_END_X = -STAGE_W * 0.6; // off-stage left fraction
+
+      const dispDriver = { p: 0 };
+      tl.to(
+        dispDriver,
+        {
+          p: 1,
+          duration: DRIVER_DUR,
+          ease: `back.out(${BOUNCE_FACTOR})`,
+          onUpdate: () => {
+            const p = dispDriver.p;
+
+            // Intruder (deo card): travels from off-stage right to DEO_LEFT
+            const deoX = STAGE_W * (1 - p);
+            const deoOpacity = Math.min(1, p * FADE_IN_SHARP);
+            const deoTilt = -8 * (1 - p);
+            const deo = document.getElementById("s6-deo-card");
+            if (deo) {
+              deo.style.transform = `translateX(${deoX}px) rotate(${deoTilt}deg)`;
+              deo.style.opacity   = String(deoOpacity);
+            }
+
+            // Victim (vernis card): compacts and moves to left rail
+            const victimP = Math.min(1, p / VICTIM_FRACTION);
+
+            // Interpolate position and size from Phase1 to Phase2-rail
+            const curLeft = 1280 + (RAIL_LEFT - 1280) * victimP;
+            const curTop  = CARD_TOP_CTR + (RAIL_TOP - CARD_TOP_CTR) * victimP;
+            const curW    = CARD_W_LG + (CARD_W_SM - CARD_W_LG) * victimP;
+            const curH    = CARD_H_LG + (CARD_H_SM - CARD_H_LG) * victimP;
+
+            const vernis = document.getElementById("s6-vernis-card");
+            if (vernis) {
+              vernis.style.left   = curLeft + "px";
+              vernis.style.top    = curTop  + "px";
+              vernis.style.width  = curW    + "px";
+              vernis.style.height = curH    + "px";
+              vernis.style.opacity = String(1 - victimP * 0.35); // dim to 65% in rail
+            }
+          },
+        },
+        DRIVER_AT,
+      );
+
+      // After driver: deo card reset transform (GSAP cleanup)
+      tl.set("#s6-deo-card", { x: 0, rotation: 0 }, DRIVER_AT + DRIVER_DUR + 0.05);
+
+      // ─── Phase 3 (10–13.6s): both cards shift, brand band appears ───
+      // At t=10s, both cards move to equal supporting columns and headline band enters.
+
+      // Phase 3 card positions — equal side-by-side columns
+      // Each card ~440px wide, gap 60px, centered: total 940px
+      // Left card starts at (1920 - 940) / 2 = 490
+      const P3_LEFT_L  = 490;
+      const P3_LEFT_R  = 490 + 440 + 60;  // 990
+      const P3_TOP     = 200;  // upper area to leave room for brand band
+      const P3_W       = 440;
+      const P3_H       = 320;
+
+      // Move vernis from rail to left column
+      tl.to(
+        "#s6-vernis-card",
+        {
+          left:    P3_LEFT_L,
+          top:     P3_TOP,
+          width:   P3_W,
+          height:  P3_H,
+          opacity: 1,
+          duration: DUR.slow,
+          ease: EASE.entry,
+        },
+        10.0,
+      );
+
+      // Move deo card from center to right column
+      tl.to(
+        "#s6-deo-card",
+        {
+          left:    P3_LEFT_R,
+          top:     P3_TOP,
+          width:   P3_W,
+          height:  P3_H,
+          duration: DUR.slow,
+          ease: EASE.entry,
+        },
+        10.0,
+      );
+
+      // Brand band fade in
+      tl.fromTo(
+        "#s6-brand-band",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: DUR.med, ease: EASE.entry },
+        10.3,
+      );
+
+      // ─── Discrete text sequence Phase 3 (10–13.6s) ──────────────────
+      // Reveals brand names in lower band in two beats
+      const SEQUENCE = [
+        { t: 0,    text: "" },
+        { t: 10.4, text: "Beauty Nails" },
+        { t: 11.3, text: "Beauty Nails  ·  Mymosa" },
+      ];
+
+      function textAt(time) {
+        for (let i = SEQUENCE.length - 1; i >= 0; i--) {
+          if (time >= SEQUENCE[i].t) return SEQUENCE[i].text;
+        }
+        return "";
+      }
+
+      const seqDriver = { t: 0 };
+      tl.to(
+        seqDriver,
+        {
+          t: SCENE_DUR,
+          duration: SCENE_DUR,
+          ease: "none",
+          onUpdate: () => {
+            const el = document.getElementById("s6-seq-brand");
+            if (el) el.textContent = textAt(seqDriver.t);
+          },
+        },
+        0,
+      );
+
+      // ─── Sine-wave-loop: active primary card breathes ────────────────
+      // Phase 1: vernis breathes (0.8s after entry → 5s = 4.2s window)
+      // Phase 2: deo card breathes after settling (5s + DRIVER_DUR + 0.2s → 10s)
+      // Both: subtle amplitude, per rules
+
+      const IDLE_SCALE_AMP = 0.010;
+      const IDLE_Y_AMP     = 3;
+
+      // Vernis idle breath — Phase 1 window
+      const V_IDLE_START = 0.9;
+      const V_IDLE_DUR   = 4.8 - V_IDLE_START;  // ~3.9s
+      const V_CYCLES     = Math.floor(V_IDLE_DUR / 2.5);  // ~1 cycle
+      const vPhase = { p: 0 };
+      tl.to(
+        vPhase,
+        {
+          p: Math.PI * 2 * (V_IDLE_DUR / 2.5),
+          duration: V_IDLE_DUR,
+          ease: "none",
+          onUpdate: () => {
+            const vernis = document.getElementById("s6-vernis-card");
+            if (!vernis) return;
+            // Only apply during Phase 1 (before displacement completes)
+            if (asrDriver.t < DRIVER_AT) {
+              const sc = 1 + Math.sin(vPhase.p) * IDLE_SCALE_AMP;
+              const y  = Math.sin(vPhase.p) * IDLE_Y_AMP;
+              vernis.style.transform = `translateY(${y}px) scale(${sc})`;
+            }
+          },
+        },
+        V_IDLE_START,
+      );
+
+      // Deo idle breath — Phase 2 window (after settle)
+      const D_IDLE_START = DRIVER_AT + DRIVER_DUR + 0.25;  // ~6.15s
+      const D_IDLE_DUR   = 13.2 - D_IDLE_START;           // ~7.05s
+      const dPhase = { p: 0 };
+      tl.to(
+        dPhase,
+        {
+          p: Math.PI * 2 * (D_IDLE_DUR / 2.8),
+          duration: D_IDLE_DUR,
+          ease: "none",
+          onUpdate: () => {
+            const deo = document.getElementById("s6-deo-card");
+            if (!deo) return;
+            const sc = 1 + Math.sin(dPhase.p) * IDLE_SCALE_AMP;
+            const y  = Math.sin(dPhase.p) * IDLE_Y_AMP;
+            deo.style.transform = `translateY(${y}px) scale(${sc})`;
+          },
+        },
+        D_IDLE_START,
+      );
+
+      // ─── Slow dolly-in: scale 1 → 1.04 over full scene ─────────────
+      tl.fromTo(
+        "#s6-dolly",
+        { scale: 1 },
+        { scale: 1.04, duration: SCENE_DUR, ease: "none" },
+        0,
+      );
+
+      window.__timelines["scene_6"] = tl;
+    </script>
+  </div>
+</template>

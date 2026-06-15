@@ -1,0 +1,438 @@
+<template id="scene_9-template">
+  <div id="root" class="scene_9-root" data-composition-id="scene_9" data-width="1920" data-height="1080" data-duration="10.283" style="position:relative; width:1920px; height:1080px; overflow:hidden;">
+    <style>
+      #root {
+        background: var(--canvas);
+        font-family: var(--font-body);
+      }
+      #root *,
+      #root *::before,
+      #root *::after {
+        box-sizing: border-box;
+      }
+
+      /* Ambient mesh background — full-bleed, decorative */
+      .s9-mesh {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .s9-mesh-blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+      }
+      .s9-mesh-blob-1 {
+        width: 700px; height: 700px;
+        background: var(--brand-primary);
+        opacity: 0.08;
+        top: -180px; left: -120px;
+      }
+      .s9-mesh-blob-2 {
+        width: 600px; height: 600px;
+        background: var(--brand-secondary);
+        opacity: 0.07;
+        bottom: -150px; right: 80px;
+      }
+      .s9-mesh-blob-3 {
+        width: 500px; height: 500px;
+        background: var(--brand-accent);
+        opacity: 0.06;
+        top: 200px; left: 55%;
+      }
+
+      /* Camera layer — slow dolly-in */
+      .s9-camera {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        will-change: transform;
+        transform-origin: 50% 50%;
+      }
+
+      /* Content stack — foreground */
+      .s9-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        z-index: 2;
+      }
+
+      /* Swap wrapper — fixed dimensions, both cards absolute inside */
+      .s9-swap-wrap {
+        position: relative;
+        width: 640px;
+        height: 120px;
+        will-change: transform;
+      }
+
+      /* Outgoing: wordmark */
+      .s9-wordmark {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-display);
+        font-size: 88px;
+        font-weight: 500;
+        font-style: italic;
+        color: var(--ink);
+        letter-spacing: -0.02em;
+        line-height: 1;
+        white-space: nowrap;
+        z-index: 1;
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+      .s9-wordmark em {
+        color: var(--brand-primary);
+        font-style: italic;
+      }
+
+      /* Incoming: CTA pill */
+      .s9-cta-pill {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--brand-primary);
+        border-radius: var(--radius-pill);
+        color: var(--ink);
+        font-family: var(--font-display);
+        font-size: 52px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        padding: 0 56px;
+        z-index: 2;
+        opacity: 0;
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+
+      /* Botanical SVG arc — decorative ornament around pill */
+      .s9-botanical {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 800px;
+        height: 240px;
+        pointer-events: none;
+        z-index: 1;
+        overflow: visible;
+      }
+      .s9-botanical path {
+        fill: none;
+        stroke: var(--brand-secondary);
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        opacity: 0.55;
+      }
+
+      /* Cursor */
+      .s9-cursor {
+        position: absolute;
+        left: 280px;
+        top: 820px;
+        pointer-events: none;
+        z-index: 999;
+        will-change: transform;
+        transform-origin: 0 0;
+      }
+
+      /* Ripple rings — centered on CTA pill center */
+      .s9-ripple {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 2px solid var(--brand-primary);
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 3;
+      }
+
+      /* URL eyebrow */
+      .s9-url {
+        margin-top: 36px;
+        font-family: var(--font-mono);
+        font-size: 22px;
+        color: var(--ink);
+        letter-spacing: 0.04em;
+        opacity: 0;
+        will-change: opacity, transform;
+      }
+    </style>
+
+    <!-- Ambient mesh background -->
+    <div class="s9-mesh">
+      <div class="s9-mesh-blob s9-mesh-blob-1"></div>
+      <div class="s9-mesh-blob s9-mesh-blob-2"></div>
+      <div class="s9-mesh-blob s9-mesh-blob-3"></div>
+    </div>
+
+    <!-- Camera dolly wrapper -->
+    <div class="s9-camera" id="s9-camera">
+
+      <!-- Content stack -->
+      <div class="s9-content">
+
+        <!-- Swap container: wordmark → CTA pill -->
+        <div class="s9-swap-wrap" id="s9-swap-wrap">
+
+          <!-- Botanical arc SVG — ornament around pill -->
+          <svg class="s9-botanical" id="s9-botanical" viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg">
+            <!-- Left arc sweep -->
+            <path id="s9-arc-left" d="M 50 120 C 80 40, 200 20, 320 60 C 380 80, 400 100, 400 120" />
+            <!-- Right arc sweep -->
+            <path id="s9-arc-right" d="M 750 120 C 720 40, 600 20, 480 60 C 420 80, 400 100, 400 120" />
+            <!-- Small leaf left -->
+            <path id="s9-leaf-left" d="M 160 55 C 150 30, 175 25, 185 50 C 190 60, 175 65, 160 55 Z" />
+            <!-- Small leaf right -->
+            <path id="s9-leaf-right" d="M 640 55 C 650 30, 625 25, 615 50 C 610 60, 625 65, 640 55 Z" />
+          </svg>
+
+          <!-- Outgoing: Wordmark -->
+          <div class="s9-wordmark" id="s9-wordmark">Bioty<em>full</em>Box</div>
+
+          <!-- Incoming: CTA pill -->
+          <div class="s9-cta-pill" id="s9-cta-pill">Abonnez-vous</div>
+
+          <!-- Ripple rings (anchored relative to swap-wrap center) -->
+          <div class="s9-ripple" id="s9-ripple-1"></div>
+          <div class="s9-ripple" id="s9-ripple-2"></div>
+          <div class="s9-ripple" id="s9-ripple-3"></div>
+        </div>
+
+        <!-- URL eyebrow below the pill -->
+        <div class="s9-url" id="s9-url">biotyfullbox.fr</div>
+      </div>
+
+    </div><!-- /s9-camera -->
+
+    <!-- Cursor — absolute within root, positioned to enter from bottom-left -->
+    <div class="s9-cursor" id="s9-cursor">
+      <svg width="28" height="28" viewBox="0 0 24 24">
+        <path
+          d="M5 3L19 12L12 13L9 20L5 3Z"
+          fill="var(--ink)"
+          stroke="var(--canvas)"
+          stroke-width="1.5"
+        />
+      </svg>
+    </div>
+
+    <script>
+      const EASE = {
+        entry: "power2.out",
+        emphasis: "power2.inOut",
+        exit: "power2.in",
+        drift: "sine.inOut",
+      };
+      const DUR = {
+        snap: 0.18,
+        med: 0.5,
+        slow: 1.0,
+      };
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // ─── Constants ───────────────────────────────────────────────────────────
+
+      // Camera dolly: slow scale-in across full duration
+      const CAM_START_SCALE = 1.04;
+      const CAM_END_SCALE   = 1.0;
+
+      // scale-swap-transition timing
+      // Wordmark present for ~2s, then swap
+      const SWAP_TRIGGER    = 2.2;   // when scale-swap fires
+      const EXIT_SCALE      = 0.72;
+      const EXIT_DUR        = 0.38;
+      const ENTER_DUR       = 0.55;
+      const OVERLAP         = 0.12;
+      const BOUNCE_FACTOR   = 1.6;   // NOTE: voice file says no back.out; film-direction says no overshoot
+                                     // brief says CTA pill pops in — using back.out per scale-swap rule
+                                     // but keeping factor low (1.6) to stay "considered"
+      // ease-key fallback: scale-swap rule uses back.out which isn't in EASE; using per-rule guidance
+
+      // Stillness-before-climax: 0.5s after pill settles before cursor enters
+      // Pill fully settled at: SWAP_TRIGGER + EXIT_DUR + ~0.1 (settle) ≈ 2.78
+      // Stillness window: 2.78 → 3.28
+      // Cursor enters at ~3.3s, arrives + clicks at ~6.5s per brief
+      const CURSOR_ENTER_AT = 3.3;
+      const CURSOR_ARRIVE_AT = 6.0;   // cursor arrives at pill
+      const MOVE_DUR        = CURSOR_ARRIVE_AT - CURSOR_ENTER_AT; // 2.7s travel
+      const CLICK_AT        = 6.2;    // fire click slightly after cursor arrival
+      const PRESS_DUR       = 0.09;
+      const RIPPLE_AT       = 6.22;
+      const RIPPLE_DUR      = 0.8;
+      const RIPPLE_SCALE    = 5;
+      const RIPPLE_STAGGER  = 0.09;
+
+      // URL reveal
+      const URL_AT          = 7.5;
+      const URL_DUR         = DUR.slow;
+
+      // svg-path-draw — botanical arc after pill settles
+      // Pill settled ~2.8s; draw starts at 3.0s
+      const ARC_START       = 3.0;
+      const ARC_SEG_DUR     = 0.7;
+      const ARC_SEG2_START  = ARC_START + ARC_SEG_DUR * 0.75;  // ~3.525
+      const ARC_LEAF1_START = ARC_SEG2_START + ARC_SEG_DUR * 0.6; // ~3.945
+      const ARC_LEAF2_START = ARC_LEAF1_START + 0.1;
+
+      // sine-wave-loop on CTA pill after click settles
+      // idle begins at ~6.8 (after click + ripple), runs to end
+      const IDLE_START      = 6.8;
+      const IDLE_DUR        = 10.283 - IDLE_START; // ~3.483s
+      const CYCLES          = IDLE_DUR / 2.5;      // ~1.4 cycles, period ~2.5s
+      const SCALE_AMP       = 0.012;
+      const Y_AMP_PX        = 3;
+
+      // ─── Camera slow dolly-in ──────────────────────────────────────────────
+      tl.fromTo(
+        "#s9-camera",
+        { scale: CAM_START_SCALE },
+        { scale: CAM_END_SCALE, duration: 10.283, ease: "none" },
+        0,
+      );
+
+      // ─── Wordmark fade-in at start ─────────────────────────────────────────
+      tl.fromTo(
+        "#s9-wordmark",
+        { opacity: 0, y: 18, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: DUR.slow, ease: EASE.entry },
+        0,
+      );
+
+      // ─── scale-swap-transition: wordmark exits, CTA pill enters ───────────
+      // Outgoing wordmark: shrink + fade
+      tl.to(
+        "#s9-wordmark",
+        { scale: EXIT_SCALE, opacity: 0, duration: EXIT_DUR, ease: EASE.exit },
+        SWAP_TRIGGER,
+      );
+      // Incoming CTA pill: scale up + fade in (slightly before exit finishes — overlap)
+      tl.to(
+        "#s9-cta-pill",
+        {
+          scale: 1.0,
+          opacity: 1,
+          duration: ENTER_DUR,
+          ease: `back.out(${BOUNCE_FACTOR})`,
+        },
+        SWAP_TRIGGER + EXIT_DUR - OVERLAP,
+      );
+
+      // ─── svg-path-draw: botanical arc after pill settles ──────────────────
+      // Measure and set dash pattern via DOM — paths inline so getTotalLength() works
+      (function() {
+        var paths = [
+          document.getElementById("s9-arc-left"),
+          document.getElementById("s9-arc-right"),
+          document.getElementById("s9-leaf-left"),
+          document.getElementById("s9-leaf-right"),
+        ];
+        paths.forEach(function(p) {
+          if (!p) return;
+          var len = p.getTotalLength();
+          p.style.strokeDasharray = String(len);
+          p.style.strokeDashoffset = String(len);
+        });
+      })();
+
+      tl.to("#s9-arc-left",   { strokeDashoffset: 0, duration: ARC_SEG_DUR, ease: "power2.out" }, ARC_START);
+      tl.to("#s9-arc-right",  { strokeDashoffset: 0, duration: ARC_SEG_DUR, ease: "power2.out" }, ARC_SEG2_START);
+      tl.to("#s9-leaf-left",  { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, ARC_LEAF1_START);
+      tl.to("#s9-leaf-right", { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, ARC_LEAF2_START);
+
+      // ─── cursor-click-ripple ───────────────────────────────────────────────
+      // Cursor starts at CSS position (280px, 820px relative to root).
+      // CTA pill center in root coordinates:
+      //   camera wrapper is centered at (960, 540).
+      //   swap-wrap is 640×120 centered → top-left at (960-320, 540-60) = (640, 480).
+      //   pill center = (640+320, 480+60) = (960, 540).
+      // Cursor origin in root: left=280, top=820.
+      // TARGET_X = 960 - 280 = 680; TARGET_Y = 540 - 820 = -280
+      var TARGET_X = 680;
+      var TARGET_Y = -280;
+
+      // Phase 1 — Move cursor to pill center
+      tl.to(
+        "#s9-cursor",
+        { x: TARGET_X, y: TARGET_Y, duration: MOVE_DUR, ease: "power2.inOut" },
+        CURSOR_ENTER_AT,
+      );
+
+      // Phase 2 — Click: cursor + pill depress together
+      tl.to(
+        "#s9-cursor",
+        { scale: 0.85, duration: PRESS_DUR, ease: "power2.in", yoyo: true, repeat: 1 },
+        CLICK_AT,
+      );
+      tl.to(
+        "#s9-cta-pill",
+        { scale: 0.95, duration: PRESS_DUR, ease: "power2.in", yoyo: true, repeat: 1 },
+        CLICK_AT,
+      );
+
+      // Phase 3 — Ripple rings expand from pill center
+      tl.set(["#s9-ripple-1", "#s9-ripple-2", "#s9-ripple-3"], { opacity: 1 }, RIPPLE_AT);
+      tl.to(
+        ["#s9-ripple-1", "#s9-ripple-2", "#s9-ripple-3"],
+        {
+          scale: RIPPLE_SCALE,
+          opacity: 0,
+          duration: RIPPLE_DUR,
+          ease: "power2.out",
+          stagger: RIPPLE_STAGGER,
+          immediateRender: false,
+        },
+        RIPPLE_AT,
+      );
+
+      // ─── URL reveal below pill ─────────────────────────────────────────────
+      tl.fromTo(
+        "#s9-url",
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: URL_DUR, ease: EASE.entry },
+        URL_AT,
+      );
+
+      // ─── sine-wave-loop: CTA pill breathes after click ────────────────────
+      var phase = { p: 0 };
+      var pillEl = document.getElementById("s9-cta-pill");
+      tl.to(
+        phase,
+        {
+          p: Math.PI * 2 * CYCLES,
+          duration: IDLE_DUR,
+          ease: "none",
+          onUpdate: function() {
+            var scl = 1 + Math.sin(phase.p) * SCALE_AMP;
+            var dy  = Math.sin(phase.p) * Y_AMP_PX;
+            pillEl.style.transform = "translateY(" + dy + "px) scale(" + scl + ")";
+          },
+        },
+        IDLE_START,
+      );
+
+      window.__timelines["scene_9"] = tl;
+    </script>
+  </div>
+</template>
