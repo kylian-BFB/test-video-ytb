@@ -1,0 +1,522 @@
+{
+  "total_scenes": 9,
+  "width": 1920,
+  "height": 1080,
+  "captions_enabled": false,
+  "film_direction": "**Palette:** 60% cream canvas over brand-color mesh (heavy veil, three atmospheric blobs, reads as restrained base at distance) / 30% translucent card surfaces + hairline rules (`--surface-card` translucency; no separate surface token) / 10% accent — brand-primary turquoise carries heroes and the CTA; brand-secondary pink binds to product labels and feminine accents only. Two-color-per-scene limit; ink stays `--ink` on every surface — no inverted text.\n**Type:** display (`--font-display` serif, italic `<em>` for one warm phrase per headline) for hero claims and brand names; body (`--font-body`) for supporting copy; mono for eyebrows, metadata, URL. Sentence case throughout.\n**Motion:** entries `EASE.entry`; heroes heavy; idle `EASE.drift`; exits none — scenes hold final frame. Budget: one root-level camera move per scene + at most one breathing hero or one decorative cluster; everything else rests.\n**Ambient:** brand-color mesh background (heavy veil, brand-primary + brand-secondary + brand-accent as three subtle atmospheric blobs) full-bleed every scene including closing CTA. No additional grid, scanline, or bokeh layer.\n**Never (film-wide):** no dark ground, no neon-on-black, no purple-blue AI gradient, no bokeh spheres, no drop shadows or glow bloom halos, no z-stacked cards, no uppercase text, no three brand colors in one scene.\n**Transitions:** `blur-crossfade` and `push-slide` only — two types across the full film.\n**Stillness-before-climax:** scenes 1, 7, and 9 only.\n**Assets:** No `assetCandidates` across all 9 scenes — all compositions are text and graphics only.",
+  "total_duration_s": 87.915,
+  "bgm_path": "",
+  "font_face_css": "",
+  "brand_tokens_css": ":root {\n  --brand-primary:   #00B4CC;\n  --brand-secondary: #F9A8D4;\n  --brand-tertiary:  #FBBF24;\n  --brand-accent:    #FBBF24;\n  --brand-costume:   #FFF8F0;\n  --ink:             #2D6A6A;\n  --canvas:          #FFF8F0;\n  --brand-gradient:  linear-gradient(135deg, #00B4CC 0%, #F9A8D4 50%, #FBBF24 100%);\n  --deco-1:          #F7CB46;\n  --deco-2:          #99E885;\n  --deco-3:          #C0F7FE;\n  --deco-4:          #FE90E8;\n  --font-display:    'EB Garamond', Georgia, serif;\n  --font-body:       'Work Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;\n  --font-mono:       'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;\n  --paper-anchor: #f2eedf;\n  --surface-card: rgba(255, 255, 255, 0.55);\n  --surface-paper: color-mix(in srgb, var(--brand-accent) 8%, var(--paper-anchor));\n  --rule-dashed: 1px dashed color-mix(in srgb, var(--ink) 18%, transparent);\n  --rule-solid: 1.5px solid color-mix(in srgb, var(--ink) 35%, transparent);\n  --radius-card-lg: 36px; /* large insight / closer / stat cards */\n  --radius-card: 28px; /* default cards, items, process nodes */\n  --radius-card-sm: 24px; /* compact panels, action bars */\n  --radius-tile: 16px; /* swatch tiles */\n  --radius-chip: 14px; /* small decorative chips */\n  --radius-pill: 999px; /* status pills, swatch discs */\n  --gap-outer: 4.2vw; /* ~80px on 1920 — outer slide padding */\n  --gap-cards: 1.5vw; /* ~28px between cards in a row */\n  --gap-cards-lg: 1.9vw; /* ~36px between major panels */\n  --gap-stack: 1.9vw; /* vertical between stacked text */\n  --pad-card-lg: 64px 48px;\n  --pad-card-md: 48px 52px;\n  --pad-card-sm: 28px 30px;\n  --measure-body: 32vw; /* ~614px ≈ 65ch at body size */\n  --measure-display: 43vw; /* ~826px ≈ display headline cap */\n}",
+  "groups": [
+    {
+      "worker_id": "w1",
+      "scene_ids": [
+        "scene_1"
+      ],
+      "scenes": {
+        "scene_1": {
+          "start_s": 0,
+          "effects": [
+            "discrete-text-sequence",
+            "multi-phase-camera",
+            "svg-path-draw",
+            "sine-wave-loop"
+          ],
+          "rule_paths": [
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/discrete-text-sequence.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/multi-phase-camera.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/svg-path-draw.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/sine-wave-loop.md"
+          ],
+          "assetCandidates": [],
+          "estimatedDuration_s": 6.827,
+          "voicePath": "assets/voice/scene_1.wav",
+          "wordsPath": "",
+          "blueprint": "composed",
+          "design_chunks": {
+            "tokens_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/tokens.css",
+            "easings_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/easings.js",
+            "voice_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/voice.md",
+            "hints_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/composition-hints.md",
+            "type_roles_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/type-roles.md",
+            "components": [
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/action-bar.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/button.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/chip.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/color-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/dashed-rule.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/drop-cap.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/hero.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/pull-quote.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/soft-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/stat-counter.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/step-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/swatch-row.html"
+            ]
+          },
+          "creative_brief": "Luminous opening hook — unhurried, warm, the film's first breath. Centered composition: display-tier headline fills ~55% canvas width with generous breathing room. `multi-phase-camera` gentle pull-back (wide → settled) for the first 2s, then slow dolly-in hold. `discrete-text-sequence` assembles the rhetorical question in two beats — question phrase first, then \"BiotyfullBox\" brand name in brand-primary turquoise (display tier, tight tracking); italic `<em>` on \"airs de vacances\". `svg-path-draw` traces a delicate botanical arc framing the headline after the brand name lands. **Stillness-before-climax 0.5s** — botanical arc complete, camera still — before \"BiotyfullBox\" stamp resolves. `sine-wave-loop` breathes the brand name as the sole live secondary element. Eye drifts forward into the box reveal.\n\n"
+        }
+      }
+    },
+    {
+      "worker_id": "w2",
+      "scene_ids": [
+        "scene_2"
+      ],
+      "scenes": {
+        "scene_2": {
+          "start_s": 6.827,
+          "effects": [
+            "center-outward-expansion",
+            "counting-dynamic-scale",
+            "card-morph-anchor",
+            "sine-wave-loop"
+          ],
+          "rule_paths": [
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/center-outward-expansion.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/counting-dynamic-scale.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/card-morph-anchor.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/sine-wave-loop.md"
+          ],
+          "assetCandidates": [],
+          "estimatedDuration_s": 10.005,
+          "voicePath": "assets/voice/scene_2.wav",
+          "wordsPath": "",
+          "blueprint": "composed",
+          "design_chunks": {
+            "tokens_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/tokens.css",
+            "easings_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/easings.js",
+            "voice_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/voice.md",
+            "hints_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/composition-hints.md",
+            "type_roles_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/type-roles.md",
+            "components": [
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/action-bar.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/button.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/chip.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/color-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/dashed-rule.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/drop-cap.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/hero.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/pull-quote.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/soft-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/stat-counter.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/step-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/swatch-row.html"
+            ]
+          },
+          "creative_brief": "Wonder and abundance — expansive, slow-reveal. Layered-depth composition: a centered hero card (display-tier \"Box Beauté Naturelle Été\", brand-secondary pink card fill, ~50% canvas height) sits at center. From it, seven small product chips expand outward via `center-outward-expansion` (stagger ≤400ms total). At ~5s `card-morph-anchor` morphs the hero card and `counting-dynamic-scale` raises the count \"7\" in a stat block (font grows with count). Body copy \"produits naturels et bio\" supports beneath. Macro motion: slow dolly-in throughout. Hero card breathes as the sole secondary live element.\n\n"
+        }
+      }
+    },
+    {
+      "worker_id": "w3",
+      "scene_ids": [
+        "scene_3"
+      ],
+      "scenes": {
+        "scene_3": {
+          "start_s": 16.832,
+          "effects": [
+            "discrete-text-sequence",
+            "svg-icon-enrichment",
+            "asr-keyword-glow",
+            "viewport-change"
+          ],
+          "rule_paths": [
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/discrete-text-sequence.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/svg-icon-enrichment.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/asr-keyword-glow.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/viewport-change.md"
+          ],
+          "assetCandidates": [],
+          "estimatedDuration_s": 10.731,
+          "voicePath": "assets/voice/scene_3.wav",
+          "wordsPath": "",
+          "blueprint": "composed",
+          "design_chunks": {
+            "tokens_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/tokens.css",
+            "easings_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/easings.js",
+            "voice_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/voice.md",
+            "hints_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/composition-hints.md",
+            "type_roles_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/type-roles.md",
+            "components": [
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/action-bar.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/button.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/chip.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/color-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/dashed-rule.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/drop-cap.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/hero.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/pull-quote.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/soft-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/stat-counter.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/step-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/swatch-row.html"
+            ]
+          },
+          "creative_brief": "Freshness and botanical trust — confident left-to-right feature reveal. Asymmetric 60/40 composition: left 60% primary column holds a feature card (brand-primary turquoise fill, display-tier \"Nettoyant Visage\", eyebrow chip \"Hoolia\"); right 40% supporting zone holds a hibiscus SVG icon panel. `svg-icon-enrichment` progressively opens hibiscus petals with a pulsing center dot. `discrete-text-sequence` introduces brand name then formula copy in two beats (~0.7s gap). `asr-keyword-glow` glows \"hibiscus\" and \"purifie\" as narrated. Macro motion: `viewport-change` gentle rightward pan. Hibiscus icon petal animation is the sole secondary live element. Eye exits left toward the next product.\n\n"
+        }
+      }
+    },
+    {
+      "worker_id": "w4",
+      "scene_ids": [
+        "scene_4"
+      ],
+      "scenes": {
+        "scene_4": {
+          "start_s": 27.563,
+          "effects": [
+            "split-tilt-cards",
+            "svg-path-draw",
+            "asr-keyword-glow",
+            "sine-wave-loop"
+          ],
+          "rule_paths": [
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/split-tilt-cards.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/svg-path-draw.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/asr-keyword-glow.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/sine-wave-loop.md"
+          ],
+          "assetCandidates": [],
+          "estimatedDuration_s": 10.88,
+          "voicePath": "assets/voice/scene_4.wav",
+          "wordsPath": "",
+          "blueprint": "based-on comparison-split-cards",
+          "design_chunks": {
+            "tokens_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/tokens.css",
+            "easings_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/easings.js",
+            "voice_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/voice.md",
+            "hints_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/composition-hints.md",
+            "type_roles_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/type-roles.md",
+            "components": [
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/action-bar.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/button.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/chip.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/color-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/dashed-rule.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/drop-cap.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/hero.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/pull-quote.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/soft-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/stat-counter.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/step-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/swatch-row.html"
+            ]
+          },
+          "creative_brief": "Sun protection — tactile dual-card reveal from opposite directions. Split-screen: left card (canvas fill) carries the UV protection claim (+12° rotateY); right card (brand-secondary pink fill) carries \"Skin Restore Tîtl\" benefit at display tier (−12° rotateY). Pill badge \"UV protect\" pops at the inner card edge with `EASE.entry` snappy. `svg-path-draw` traces a dashed sun-ray arc in the background zone (ambient ornament only). `asr-keyword-glow` highlights \"soleil\" and \"UV\". Macro motion: slow dolly-in; both cards breathe in antiphase (`Math.PI` phase offset) as the sole secondary live element. Eye rests at center gap then flows downward.\n\n"
+        }
+      }
+    },
+    {
+      "worker_id": "w5",
+      "scene_ids": [
+        "scene_5"
+      ],
+      "scenes": {
+        "scene_5": {
+          "start_s": 38.443,
+          "effects": [
+            "discrete-text-sequence",
+            "svg-icon-enrichment",
+            "sine-wave-loop",
+            "viewport-change"
+          ],
+          "rule_paths": [
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/discrete-text-sequence.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/svg-icon-enrichment.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/sine-wave-loop.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/viewport-change.md"
+          ],
+          "assetCandidates": [],
+          "estimatedDuration_s": 8.555,
+          "voicePath": "assets/voice/scene_5.wav",
+          "wordsPath": "",
+          "blueprint": "composed",
+          "design_chunks": {
+            "tokens_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/tokens.css",
+            "easings_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/easings.js",
+            "voice_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/voice.md",
+            "hints_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/composition-hints.md",
+            "type_roles_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/type-roles.md",
+            "components": [
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/action-bar.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/button.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/chip.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/color-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/dashed-rule.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/drop-cap.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/hero.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/pull-quote.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/soft-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/stat-counter.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/step-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/swatch-row.html"
+            ]
+          },
+          "creative_brief": "Security and sensory comfort — quiet complement after two bold reveals. Centered composition: a soft card (`--surface-card` translucency) holds display-tier \"Bouclier invisible\" and two body lines. An enriched SVG shield icon (interior fill pulses softly) sits above the headline as ornament. `discrete-text-sequence` assembles headline first, then two body lines stagger in. `svg-icon-enrichment` drives the shield pulse. Macro motion: `viewport-change` gentle upward drift — calm, protective. Shield pulse is the sole secondary live element; everything else rests in hold. Eye drifts upward and right toward the surprise scene.\n\n"
+        }
+      }
+    },
+    {
+      "worker_id": "w6",
+      "scene_ids": [
+        "scene_6"
+      ],
+      "scenes": {
+        "scene_6": {
+          "start_s": 46.998,
+          "effects": [
+            "reactive-displacement",
+            "discrete-text-sequence",
+            "asr-keyword-glow",
+            "sine-wave-loop"
+          ],
+          "rule_paths": [
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/reactive-displacement.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/discrete-text-sequence.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/asr-keyword-glow.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/sine-wave-loop.md"
+          ],
+          "assetCandidates": [],
+          "estimatedDuration_s": 13.632,
+          "voicePath": "assets/voice/scene_6.wav",
+          "wordsPath": "",
+          "blueprint": "composed",
+          "design_chunks": {
+            "tokens_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/tokens.css",
+            "easings_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/easings.js",
+            "voice_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/voice.md",
+            "hints_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/composition-hints.md",
+            "type_roles_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/type-roles.md",
+            "components": [
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/action-bar.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/button.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/chip.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/color-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/dashed-rule.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/drop-cap.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/hero.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/pull-quote.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/soft-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/stat-counter.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/step-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/swatch-row.html"
+            ]
+          },
+          "creative_brief": "**PrimarySubjectTimeline:** 0–5.0s vernis card primary, right zone only; 5.0–10.0s déodorant card primary (center safe zone), vernis demotes to left supporting rail; 10.0–13.6s both cards in triptych, brand names headline primary.\n**Handoff:** At 5.0s the vernis card compacts to a smaller left-rail supporting tile before the déodorant card enters from the right. At 10.0s both cards shift to equal supporting columns; the headline band owns the primary zone.\n\nJoyful double discovery — playful multi-phase, brisk rhythm. Phase 1 (0–5s): asymmetric right-anchored card, \"Beauty Nails\" display, brand-secondary pink fill; `asr-keyword-glow` on \"turquoise\". Phase 2 (5–10s): `reactive-displacement` spring from incoming déodorant card pushes vernis to rail; \"Mymosa\" eyebrow on canvas fill card, `asr-keyword-glow` on \"naturel\". Phase 3 (10–13.6s): both cards side-by-side, `discrete-text-sequence` reveals full brand names in lower display band. Macro motion: slow dolly-in throughout. The active primary card breathes as sole secondary live element. Eye exits left.\n\n"
+        }
+      }
+    },
+    {
+      "worker_id": "w7",
+      "scene_ids": [
+        "scene_7"
+      ],
+      "scenes": {
+        "scene_7": {
+          "start_s": 60.63,
+          "effects": [
+            "asr-keyword-glow",
+            "svg-path-draw",
+            "multi-phase-camera",
+            "sine-wave-loop"
+          ],
+          "rule_paths": [
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/asr-keyword-glow.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/svg-path-draw.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/multi-phase-camera.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/sine-wave-loop.md"
+          ],
+          "assetCandidates": [],
+          "estimatedDuration_s": 8.981,
+          "voicePath": "assets/voice/scene_7.wav",
+          "wordsPath": "",
+          "blueprint": "composed",
+          "design_chunks": {
+            "tokens_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/tokens.css",
+            "easings_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/easings.js",
+            "voice_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/voice.md",
+            "hints_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/composition-hints.md",
+            "type_roles_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/type-roles.md",
+            "components": [
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/action-bar.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/button.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/chip.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/color-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/dashed-rule.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/drop-cap.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/hero.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/pull-quote.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/soft-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/stat-counter.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/step-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/swatch-row.html"
+            ]
+          },
+          "creative_brief": "Luminous aspiration — emotional apex of product beauty, soft and radiant. Rule-of-thirds: primary editorial soft card anchors upper-left third (display-tier \"Éclat parfait\", italic `<em>` on \"éclat\", two supporting body lines); a decorative SVG botanical arc draws in the right-third zone as ornament. `asr-keyword-glow` glows \"hydratation\" (~3s) and \"brillantes\" (~6s) as narrated. **Stillness-before-climax 0.6s** after the second keyword glow peaks — camera micro-hold — before the final body phrase appears. Macro motion: `multi-phase-camera` slow push-in first half, micro-drift hold second half. Headline breathes as sole secondary live element. Eye softens toward center, transitioning to value summary.\n\n"
+        }
+      }
+    },
+    {
+      "worker_id": "w8",
+      "scene_ids": [
+        "scene_8"
+      ],
+      "scenes": {
+        "scene_8": {
+          "start_s": 69.611,
+          "effects": [
+            "counting-dynamic-scale",
+            "center-outward-expansion",
+            "asr-keyword-glow",
+            "sine-wave-loop"
+          ],
+          "rule_paths": [
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/counting-dynamic-scale.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/center-outward-expansion.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/asr-keyword-glow.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/sine-wave-loop.md"
+          ],
+          "assetCandidates": [],
+          "estimatedDuration_s": 8.021,
+          "voicePath": "assets/voice/scene_8.wav",
+          "wordsPath": "",
+          "blueprint": "based-on hook-counter-burst",
+          "design_chunks": {
+            "tokens_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/tokens.css",
+            "easings_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/easings.js",
+            "voice_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/voice.md",
+            "hints_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/composition-hints.md",
+            "type_roles_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/type-roles.md",
+            "components": [
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/action-bar.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/button.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/chip.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/color-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/dashed-rule.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/drop-cap.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/hero.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/pull-quote.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/soft-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/stat-counter.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/step-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/swatch-row.html"
+            ]
+          },
+          "creative_brief": "Rational satisfaction — measured warmth, not boastful. Centered three-layer composition: `counting-dynamic-scale` counts 6 → 10 with font growing in the stat block. Four supporting benefit chips (`center-outward-expansion`) radiate from the stat block (livraison, bio, naturel, valeur). `asr-keyword-glow` highlights \"valeur supérieure\". Macro motion: slow dolly-in throughout. Stat block breathes as sole secondary live element during hold. Eye flows forward to the CTA scene.\n\n"
+        }
+      }
+    },
+    {
+      "worker_id": "w9",
+      "scene_ids": [
+        "scene_9"
+      ],
+      "scenes": {
+        "scene_9": {
+          "start_s": 77.632,
+          "effects": [
+            "scale-swap-transition",
+            "cursor-click-ripple",
+            "sine-wave-loop",
+            "svg-path-draw"
+          ],
+          "rule_paths": [
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/scale-swap-transition.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/cursor-click-ripple.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/sine-wave-loop.md",
+            "/home/user/test-video-ytb/.agents/skills/hyperframes-animation/rules/svg-path-draw.md"
+          ],
+          "assetCandidates": [],
+          "estimatedDuration_s": 10.283,
+          "voicePath": "assets/voice/scene_9.wav",
+          "wordsPath": "",
+          "blueprint": "based-on cta-morph-press",
+          "design_chunks": {
+            "tokens_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/tokens.css",
+            "easings_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/easings.js",
+            "voice_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/voice.md",
+            "hints_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/composition-hints.md",
+            "type_roles_file": "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/type-roles.md",
+            "components": [
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/action-bar.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/button.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/chip.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/color-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/dashed-rule.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/drop-cap.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/hero.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/pull-quote.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/soft-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/stat-counter.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/step-card.html",
+              "/home/user/test-video-ytb/videos/biotyfullbox-box-ete/design-system/chunks/components/swatch-row.html"
+            ]
+          },
+          "creative_brief": "Belonging and warm resolution — the quiet close after the journey. **Stillness-before-climax 0.5s** after the pill fully settles, before the cursor enters. Centered composition: wordmark in display serif breathes at center for the opening ~2s, then `scale-swap-transition` morphs it into a brand-primary \"Abonnez-vous\" CTA pill. `svg-path-draw` traces a delicate botanical arc around the pill as supporting ornament. `cursor-click-ripple` tracks cursor to the pill with press and outward ripple at ~6.5s. \"biotyfullbox.fr\" in mono eyebrow tier appears below the pill at ~7.5s. Macro motion: slow dolly-in throughout. CTA pill breathes as sole live secondary element after click. No exit — film ends here.\n"
+        }
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "from": "scene_1",
+      "to": "scene_2",
+      "type": "blur-crossfade",
+      "direction": null,
+      "duration_s": 0.6
+    },
+    {
+      "from": "scene_2",
+      "to": "scene_3",
+      "type": "push-slide",
+      "direction": "LEFT",
+      "duration_s": 0.5
+    },
+    {
+      "from": "scene_3",
+      "to": "scene_4",
+      "type": "push-slide",
+      "direction": "RIGHT",
+      "duration_s": 0.5
+    },
+    {
+      "from": "scene_4",
+      "to": "scene_5",
+      "type": "blur-crossfade",
+      "direction": null,
+      "duration_s": 0.6
+    },
+    {
+      "from": "scene_5",
+      "to": "scene_6",
+      "type": "push-slide",
+      "direction": "LEFT",
+      "duration_s": 0.5
+    },
+    {
+      "from": "scene_6",
+      "to": "scene_7",
+      "type": "blur-crossfade",
+      "direction": null,
+      "duration_s": 0.6
+    },
+    {
+      "from": "scene_7",
+      "to": "scene_8",
+      "type": "zoom-through",
+      "direction": null,
+      "duration_s": 0.4
+    },
+    {
+      "from": "scene_8",
+      "to": "scene_9",
+      "type": "blur-crossfade",
+      "direction": null,
+      "duration_s": 0.6
+    }
+  ],
+  "sfx": []
+}

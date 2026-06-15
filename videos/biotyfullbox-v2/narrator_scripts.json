@@ -1,0 +1,170 @@
+{
+  "project": "BiotyfullBox – Box Beauté Naturelle Été",
+  "narrativeArchetype": "Product Showcase with Emotional Discovery",
+  "orientation": "landscape",
+  "emotionalArc": "Curiosité et envie face à une box mystérieuse, glissant vers l'émerveillement produit par produit, pour culminer dans le désir d'abonnement et l'appartenance à une communauté beauté naturelle.",
+  "scenes": [
+    {
+      "sceneNumber": 1,
+      "sceneName": "Accroche Estivale",
+      "transition": {
+        "intent": "cut",
+        "description": "Ouverture directe sur le logo, aucune transition précédente."
+      },
+      "narrativeIntent": {
+        "type": "hook",
+        "narrativeRole": "Capturer l'attention avec une promesse de beauté naturelle cet été",
+        "keyMessage": "La BiotyfullBox de l'été est arrivée",
+        "persuasion": "Question rhétorique créant l'envie d'évasion estivale et de soin personnel",
+        "emotionalBeat": "Curiosité légère et sentiment de vacances"
+      },
+      "script": "Et si ce mois-ci, votre routine beauté prenait des airs de vacances ? Bienvenue dans la <brand>BiotyfullBox</brand> de l'été.",
+      "estimatedDuration": "7-8s",
+      "assetCandidates": []
+    },
+    {
+      "sceneNumber": 2,
+      "sceneName": "Révélation de la Box",
+      "transition": {
+        "intent": "dissolve",
+        "description": "Fondu doux depuis l'accroche vers la révélation de la box, créant une atmosphère de découverte progressive."
+      },
+      "narrativeIntent": {
+        "type": "product_intro",
+        "narrativeRole": "Présenter la box dans toute sa splendeur estivale avec ses 7 produits",
+        "keyMessage": "7 produits beauté naturels et bio soigneusement sélectionnés",
+        "persuasion": "Démonstration visuelle de la valeur perçue – abondance et qualité",
+        "emotionalBeat": "Émerveillement et sentiment d'abondance"
+      },
+      "script": "Ce mois-ci, <brand>BiotyfullBox</brand> vous a préparé une sélection de sept produits beauté naturels et bio, soigneusement choisis pour sublimer votre peau et vos cheveux tout l'été.",
+      "estimatedDuration": "10-12s",
+      "assetCandidates": []
+    },
+    {
+      "sceneNumber": 3,
+      "sceneName": "Nettoyant Visage Hoolia",
+      "transition": {
+        "intent": "slide",
+        "description": "Glissement depuis la gauche introduisant le premier produit, donnant un rythme dynamique à la présentation."
+      },
+      "narrativeIntent": {
+        "type": "feature_showcase",
+        "narrativeRole": "Présenter le premier produit phare – le nettoyant visage naturel",
+        "keyMessage": "Pureté et douceur pour le visage grâce à l'hibiscus",
+        "persuasion": "Mise en valeur de l'ingrédient naturel clé pour crédibilité et désir",
+        "emotionalBeat": "Fraîcheur et confiance dans la naturalité du produit"
+      },
+      "script": "On commence avec le Nettoyant Visage de <brand>Hoolia</brand>. Une formule douce enrichie en extrait de fleur d'hibiscus, qui purifie en profondeur tout en respectant l'équilibre naturel de votre peau.",
+      "estimatedDuration": "10-11s",
+      "assetCandidates": []
+    },
+    {
+      "sceneNumber": 4,
+      "sceneName": "Soin Solaire Capillaire Tîtl",
+      "transition": {
+        "intent": "slide",
+        "description": "Glissement depuis la droite pour varier le rythme tout en maintenant l'énergie de la présentation produit."
+      },
+      "narrativeIntent": {
+        "type": "feature_showcase",
+        "narrativeRole": "Présenter le soin capillaire solaire protecteur",
+        "keyMessage": "Protection solaire des cheveux avec un soin naturel innovant",
+        "persuasion": "Bénéfice fonctionnel fort – protection UV et soin en un seul geste",
+        "emotionalBeat": "Rassurance et désir de cheveux protégés et brillants"
+      },
+      "script": "Ensuite, le Skin Restore de <brand>Tîtl</brand> – un soin solaire capillaire qui protège vos cheveux des agressions du soleil et des UV, avec un extrait de Tîtl pour des longueurs sublimées.",
+      "estimatedDuration": "10-11s",
+      "assetCandidates": []
+    },
+    {
+      "sceneNumber": 5,
+      "sceneName": "Le Lait Capillaire Protecteur",
+      "transition": {
+        "intent": "dissolve",
+        "description": "Transition douce renforçant le thème de soin capillaire entre les deux produits cheveux consécutifs."
+      },
+      "narrativeIntent": {
+        "type": "feature_showcase",
+        "narrativeRole": "Compléter la routine capillaire estivale avec le lait protecteur",
+        "keyMessage": "Bouclier protecteur invisible contre chaleur, humidité et agressions",
+        "persuasion": "Complémentarité avec le produit précédent – routine complète et cohérente",
+        "emotionalBeat": "Sécurité et plaisir de prendre soin de ses cheveux"
+      },
+      "script": "Pour compléter le soin de vos cheveux, ce Lait Capillaire protecteur crée un bouclier invisible contre la chaleur, l'humidité et les agressions estivales.",
+      "estimatedDuration": "9-10s",
+      "assetCandidates": []
+    },
+    {
+      "sceneNumber": 6,
+      "sceneName": "Vernis et Déodorant – Petits Plaisirs",
+      "transition": {
+        "intent": "slide",
+        "description": "Glissement dynamique introduisant la double surprise beauté – vernis et déodorant présentés ensemble."
+      },
+      "narrativeIntent": {
+        "type": "feature_showcase",
+        "narrativeRole": "Présenter les surprises beauté du quotidien et des ongles",
+        "keyMessage": "Un vernis tendance et un déodorant naturel efficace pour le confort quotidien",
+        "persuasion": "Effet de surprise positive – la box va au-delà du soin visage et cheveux",
+        "emotionalBeat": "Joie de la découverte et plaisir des petits extras"
+      },
+      "script": "La box réserve aussi de belles surprises pour vos ongles et votre confort au quotidien. Un vernis tendance turquoise signé <brand>Beauty Nails</brand>, et le Déodorant Soin Protection de <brand>Mymosa</brand>, naturel et efficace toute la journée.",
+      "estimatedDuration": "12-13s",
+      "assetCandidates": []
+    },
+    {
+      "sceneNumber": 7,
+      "sceneName": "Sérum et Gloss – Éclat Parfait",
+      "transition": {
+        "intent": "dissolve",
+        "description": "Fondu lumineux vers les derniers produits éclat, créant une transition douce et élégante."
+      },
+      "narrativeIntent": {
+        "type": "feature_showcase",
+        "narrativeRole": "Clore la présentation des produits avec les soins éclat et lèvres",
+        "keyMessage": "Hydratation et éclat même sous le soleil",
+        "persuasion": "Image aspirationnelle – beauté naturelle rayonnante en été",
+        "emotionalBeat": "Désir d'une beauté lumineuse et naturelle"
+      },
+      "script": "Et pour un éclat parfait, un sérum boosteur d'hydratation et un gloss baume rose nourrissant pour des lèvres pulpeuses et brillantes – même sous le soleil.",
+      "estimatedDuration": "9-10s",
+      "assetCandidates": []
+    },
+    {
+      "sceneNumber": 8,
+      "sceneName": "La Valeur de l'Abonnement",
+      "transition": {
+        "intent": "zoom",
+        "description": "Zoom arrière révélant les chiffres clés de la box – passage du concret produit à la valeur globale."
+      },
+      "narrativeIntent": {
+        "type": "branding",
+        "narrativeRole": "Ancrer la proposition de valeur – plus de produits que le prix payé",
+        "keyMessage": "6 à 10 produits livrés chaque mois, valeur toujours supérieure au prix",
+        "persuasion": "Argument rationnel de rapport qualité-prix pour lever les freins à l'achat",
+        "emotionalBeat": "Sentiment de faire une bonne affaire et d'être gâtée"
+      },
+      "script": "Chaque mois, entre six et dix produits beauté naturels vous sont livrés directement chez vous, pour une valeur toujours supérieure au prix de votre abonnement.",
+      "estimatedDuration": "8-9s",
+      "assetCandidates": []
+    },
+    {
+      "sceneNumber": 9,
+      "sceneName": "Appel à l'Action",
+      "transition": {
+        "intent": "dissolve",
+        "description": "Fondu élégant vers le logo et le CTA final, concluant le voyage beauté avec un appel fort à rejoindre la communauté."
+      },
+      "narrativeIntent": {
+        "type": "cta",
+        "narrativeRole": "Convertir l'intérêt en abonnement – appel clair et communautaire",
+        "keyMessage": "Rejoindre la communauté BiotyfullBox sur biotyfullbox.fr",
+        "persuasion": "Appartenance à une communauté et urgence douce avec adverbe maintenant",
+        "emotionalBeat": "Enthousiasme et sentiment d'appartenance à une communauté beauté naturelle"
+      },
+      "script": "Rejoignez la communauté <brand>BiotyfullBox</brand> et découvrez chaque mois de nouveaux coups de cœur beauté naturels. Abonnez-vous dès maintenant sur <cta>biotyfullbox.fr</cta>",
+      "estimatedDuration": "9-10s",
+      "assetCandidates": []
+    }
+  ]
+}

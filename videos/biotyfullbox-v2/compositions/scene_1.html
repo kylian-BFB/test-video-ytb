@@ -1,0 +1,165 @@
+<template id="scene_1-template">
+<style>
+  #root.scene_1-root {
+    background: #1A1A2E;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .s1-bg {
+    position: absolute;
+    left: 0; top: 0;
+    width: 1920px; height: 1080px;
+    background: radial-gradient(ellipse at center, #2a2a4e 0%, #1A1A2E 70%);
+  }
+
+  .s1-gold-line {
+    position: absolute;
+    left: 660px; top: 560px;
+    width: 600px; height: 4px;
+    background: #FBBF24;
+    transform-origin: left center;
+  }
+
+  .s1-sparkle {
+    position: absolute;
+  }
+
+  .s1-main-title {
+    position: absolute;
+    left: 0; top: 320px;
+    width: 1920px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 96px;
+    color: #ffffff;
+    letter-spacing: 6px;
+    line-height: 1;
+    margin: 0;
+  }
+
+  .s1-subtitle {
+    position: absolute;
+    left: 0; top: 450px;
+    width: 1920px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    color: #00B4CC;
+    letter-spacing: 12px;
+    margin: 0;
+  }
+
+  .s1-tagline {
+    position: absolute;
+    left: 0; top: 640px;
+    width: 1920px;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 36px;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  .s1-subtext {
+    position: absolute;
+    left: 0; top: 700px;
+    width: 1920px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    color: #F9A8D4;
+    letter-spacing: 2px;
+    margin: 0;
+  }
+</style>
+
+<div id="root" data-composition-id="scene_1" data-width="1920" data-height="1080" data-duration="6.827" class="scene_1-root" style="position:relative; width:1920px; height:1080px; overflow:hidden;">
+
+  <!-- Track 0: Background -->
+  <div class="clip s1-bg" data-start="0" data-duration="6.827" data-track-index="0"></div>
+
+  <!-- Track 2: Gold decorative line -->
+  <div class="clip s1-gold-line" id="s1-gold-line" data-start="0" data-duration="6.827" data-track-index="2"></div>
+
+  <!-- Track 3: Sparkle 1 (top-left area) -->
+  <div class="clip s1-sparkle" id="s1-sparkle-1" data-start="0" data-duration="6.827" data-track-index="3" style="position:absolute; left:180px; top:180px;">
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M24 0 L26.5 21.5 L48 24 L26.5 26.5 L24 48 L21.5 26.5 L0 24 L21.5 21.5 Z" fill="#FBBF24"/>
+    </svg>
+  </div>
+
+  <!-- Track 4: Sparkle 2 (top-right area) -->
+  <div class="clip s1-sparkle" id="s1-sparkle-2" data-start="0" data-duration="6.827" data-track-index="4" style="position:absolute; left:1680px; top:220px;">
+    <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M24 0 L26.5 21.5 L48 24 L26.5 26.5 L24 48 L21.5 26.5 L0 24 L21.5 21.5 Z" fill="#F9A8D4"/>
+    </svg>
+  </div>
+
+  <!-- Track 5: Sparkle 3 (bottom-right area) -->
+  <div class="clip s1-sparkle" id="s1-sparkle-3" data-start="0" data-duration="6.827" data-track-index="5" style="position:absolute; left:1740px; top:820px;">
+    <svg width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M24 0 L26.5 21.5 L48 24 L26.5 26.5 L24 48 L21.5 26.5 L0 24 L21.5 21.5 Z" fill="#FBBF24"/>
+    </svg>
+  </div>
+
+  <!-- Track 6: BIOTYFULLBOX main title -->
+  <h1 class="clip s1-main-title" id="s1-main-title" data-start="0" data-duration="6.827" data-track-index="6">BIOTYFULLBOX</h1>
+
+  <!-- Track 7: ÉTÉ 2024 subtitle -->
+  <div class="clip s1-subtitle" id="s1-subtitle" data-start="0" data-duration="6.827" data-track-index="7">ÉTÉ 2024</div>
+
+  <!-- Track 8: Tagline Playfair text -->
+  <p class="clip s1-tagline" id="s1-tagline" data-start="0" data-duration="6.827" data-track-index="8">votre routine beauté prend des airs de vacances</p>
+
+  <!-- Track 9: Bienvenue subtext -->
+  <div class="clip s1-subtext" id="s1-subtext" data-start="0" data-duration="6.827" data-track-index="9">Bienvenue dans la</div>
+
+  <!-- Track 10: Audio -->
+  <audio class="clip" data-start="0" data-duration="6.827" data-track-index="10" src="../assets/voice/scene_1.wav"></audio>
+
+</div>
+
+<script>
+  window.__timelines = window.__timelines || {};
+  const tl = gsap.timeline({ paused: true });
+
+  // Initial hidden states
+  gsap.set("#s1-main-title", { scale: 0.5, opacity: 0, transformOrigin: "center center" });
+  gsap.set("#s1-subtitle", { x: 200, opacity: 0 });
+  gsap.set("#s1-gold-line", { scaleX: 0, transformOrigin: "left center" });
+  gsap.set("#s1-sparkle-1", { scale: 0, opacity: 0, transformOrigin: "center center" });
+  gsap.set("#s1-sparkle-2", { scale: 0, opacity: 0, transformOrigin: "center center" });
+  gsap.set("#s1-sparkle-3", { scale: 0, opacity: 0, transformOrigin: "center center" });
+  gsap.set("#s1-tagline", { opacity: 0 });
+  gsap.set("#s1-subtext", { opacity: 0 });
+
+  // BIOTYFULLBOX: scale from 0.5→1.0 with back.out(2)
+  tl.to("#s1-main-title", { scale: 1.0, opacity: 1, duration: 0.9, ease: "back.out(2)" }, 0);
+
+  // ÉTÉ 2024: slides in from right at 0.5s
+  tl.to("#s1-subtitle", { x: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, 0.5);
+
+  // Gold line: scaleX 0→1 at 1s
+  tl.to("#s1-gold-line", { scaleX: 1, duration: 0.6, ease: "power2.out" }, 1);
+
+  // Sparkles staggered pop from 1.2s
+  tl.to("#s1-sparkle-1", { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.5)" }, 1.2);
+  tl.to("#s1-sparkle-2", { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.5)" }, 1.45);
+  tl.to("#s1-sparkle-3", { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.5)" }, 1.7);
+
+  // Tagline fades in at 2s
+  tl.to("#s1-tagline", { opacity: 1, duration: 0.6, ease: "power2.out" }, 2);
+
+  // Subtext fades in at 2.5s
+  tl.to("#s1-subtext", { opacity: 1, duration: 0.6, ease: "power2.out" }, 2.5);
+
+  // Subtle y-axis floating on BIOTYFULLBOX (finite repeats)
+  tl.to("#s1-main-title", { y: -8, duration: 0.9, ease: "sine.inOut", repeat: 3, yoyo: true }, 1.5);
+
+  window.__timelines["scene_1"] = tl;
+</script>
+</template>

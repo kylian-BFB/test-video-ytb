@@ -1,0 +1,178 @@
+<template id="scene_2-template">
+<style>
+  #root.scene_2-root {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .s2-bg {
+    position: absolute;
+    left: 0; top: 0;
+    width: 1920px; height: 1080px;
+    background: linear-gradient(135deg, #0891b2 0%, #00B4CC 50%, #06b6d4 100%);
+  }
+
+  .s2-dot {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+  }
+
+  .s2-counter-wrap {
+    position: absolute;
+    left: 0; top: 0;
+    width: 1920px; height: 1080px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .s2-counter-el {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 220px;
+    color: #ffffff;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .s2-products-label {
+    position: absolute;
+    left: 0;
+    width: 1920px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    color: #ffffff;
+    letter-spacing: 6px;
+    margin: 0;
+    top: 680px;
+  }
+
+  .s2-naturels {
+    position: absolute;
+    left: 0;
+    width: 1920px;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 40px;
+    color: #ffffff;
+    margin: 0;
+    top: 750px;
+  }
+
+  .s2-gold-badge {
+    position: absolute;
+    right: 120px;
+    top: 160px;
+    background: #FBBF24;
+    color: #1A1A2E;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 32px;
+    padding: 20px 44px;
+    border-radius: 60px;
+    white-space: nowrap;
+    letter-spacing: 1px;
+  }
+</style>
+
+<div id="root" data-composition-id="scene_2" data-width="1920" data-height="1080" data-duration="10.005" class="scene_2-root" style="position:relative; width:1920px; height:1080px; overflow:hidden;">
+
+  <!-- Track 0: Background -->
+  <div class="clip s2-bg" data-start="0" data-duration="10.005" data-track-index="0"></div>
+
+  <!-- Track 1: Decorative dot 1 -->
+  <div class="clip s2-dot" id="s2-dot-1" data-start="0" data-duration="10.005" data-track-index="1" style="width:120px; height:120px; left:80px; top:80px;"></div>
+
+  <!-- Track 2: Decorative dot 2 -->
+  <div class="clip s2-dot" id="s2-dot-2" data-start="0" data-duration="10.005" data-track-index="2" style="width:80px; height:80px; left:1780px; top:900px;"></div>
+
+  <!-- Track 3: Decorative dot 3 -->
+  <div class="clip s2-dot" id="s2-dot-3" data-start="0" data-duration="10.005" data-track-index="3" style="width:56px; height:56px; left:1820px; top:160px;"></div>
+
+  <!-- Track 4: Decorative dot 4 -->
+  <div class="clip s2-dot" id="s2-dot-4" data-start="0" data-duration="10.005" data-track-index="4" style="width:96px; height:96px; left:60px; top:880px;"></div>
+
+  <!-- Track 6: Counter container (wraps the number) -->
+  <div class="clip s2-counter-wrap" data-start="0" data-duration="10.005" data-track-index="6">
+    <div class="s2-counter-el" id="s2-counter-el">1</div>
+  </div>
+
+  <!-- Track 7: PRODUITS BEAUTÉ label -->
+  <h2 class="clip s2-products-label" id="s2-products-label" data-start="0" data-duration="10.005" data-track-index="7">PRODUITS BEAUTÉ</h2>
+
+  <!-- Track 8: naturels & bio -->
+  <p class="clip s2-naturels" id="s2-naturels" data-start="0" data-duration="10.005" data-track-index="8">naturels &amp; bio</p>
+
+  <!-- Track 9: Gold badge -->
+  <div class="clip s2-gold-badge" id="s2-gold-badge" data-start="0" data-duration="10.005" data-track-index="9">VALEUR +40€</div>
+
+  <!-- Track 10: Audio -->
+  <audio class="clip" data-start="0" data-duration="10.005" data-track-index="10" src="../assets/voice/scene_2.wav"></audio>
+
+</div>
+
+<script>
+  window.__timelines = window.__timelines || {};
+  const tl = gsap.timeline({ paused: true });
+
+  // Initial hidden states
+  gsap.set("#s2-counter-el", { opacity: 0 });
+  gsap.set("#s2-products-label", { y: 30, opacity: 0 });
+  gsap.set("#s2-naturels", { opacity: 0 });
+  gsap.set("#s2-gold-badge", { y: -100, opacity: 0 });
+  gsap.set("#s2-dot-1", { scale: 0.6, opacity: 0.5 });
+  gsap.set("#s2-dot-2", { scale: 0.6, opacity: 0.5 });
+  gsap.set("#s2-dot-3", { scale: 0.6, opacity: 0.5 });
+  gsap.set("#s2-dot-4", { scale: 0.6, opacity: 0.5 });
+
+  // "PRODUITS BEAUTÉ" slides up from y:30 at 0s
+  tl.to("#s2-products-label", { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, 0);
+
+  // Counter appears then counts 1→7 over 3s starting at 0.5s
+  tl.to("#s2-counter-el", { opacity: 1, duration: 0.3, ease: "power2.out" }, 0.4);
+
+  var counterObj = { val: 1 };
+  tl.to(counterObj, {
+    val: 7,
+    duration: 3,
+    ease: "power1.inOut",
+    onUpdate: function() {
+      var el = document.getElementById("s2-counter-el");
+      if (el) el.textContent = Math.round(counterObj.val);
+    }
+  }, 0.5);
+
+  // Scale punch on each integer step
+  tl.to("#s2-counter-el", { scale: 1.2, duration: 0.1, ease: "power2.out" }, 0.5 + 0.5);
+  tl.to("#s2-counter-el", { scale: 1.0, duration: 0.15, ease: "power2.in" }, 0.5 + 0.6);
+  tl.to("#s2-counter-el", { scale: 1.2, duration: 0.1, ease: "power2.out" }, 0.5 + 1.0);
+  tl.to("#s2-counter-el", { scale: 1.0, duration: 0.15, ease: "power2.in" }, 0.5 + 1.1);
+  tl.to("#s2-counter-el", { scale: 1.2, duration: 0.1, ease: "power2.out" }, 0.5 + 1.5);
+  tl.to("#s2-counter-el", { scale: 1.0, duration: 0.15, ease: "power2.in" }, 0.5 + 1.6);
+  tl.to("#s2-counter-el", { scale: 1.2, duration: 0.1, ease: "power2.out" }, 0.5 + 2.0);
+  tl.to("#s2-counter-el", { scale: 1.0, duration: 0.15, ease: "power2.in" }, 0.5 + 2.1);
+  tl.to("#s2-counter-el", { scale: 1.2, duration: 0.1, ease: "power2.out" }, 0.5 + 2.5);
+  tl.to("#s2-counter-el", { scale: 1.0, duration: 0.15, ease: "power2.in" }, 0.5 + 2.6);
+  tl.to("#s2-counter-el", { scale: 1.35, duration: 0.12, ease: "power2.out" }, 0.5 + 3.0);
+  tl.to("#s2-counter-el", { scale: 1.0, duration: 0.2, ease: "back.out(1.5)" }, 0.5 + 3.12);
+
+  // "naturels & bio" fades in at 3.5s
+  tl.to("#s2-naturels", { opacity: 1, duration: 0.7, ease: "power2.out" }, 3.5);
+
+  // Gold badge bounces in from y:-100 at 2s
+  tl.to("#s2-gold-badge", { y: 0, opacity: 1, duration: 0.6, ease: "back.out(2.5)" }, 2);
+
+  // Floating dots drift animation (finite repeats)
+  tl.to("#s2-dot-1", { y: -20, duration: 2.2, ease: "sine.inOut", repeat: 2, yoyo: true }, 0);
+  tl.to("#s2-dot-2", { y: 18, duration: 1.8, ease: "sine.inOut", repeat: 2, yoyo: true }, 0.4);
+  tl.to("#s2-dot-3", { y: -14, duration: 2.5, ease: "sine.inOut", repeat: 2, yoyo: true }, 0.2);
+  tl.to("#s2-dot-4", { y: 22, duration: 2.0, ease: "sine.inOut", repeat: 2, yoyo: true }, 0.6);
+
+  window.__timelines["scene_2"] = tl;
+</script>
+</template>
